@@ -20,6 +20,7 @@ setup(
         "catboost",
         "xgboost",
         "Flask",
+        "from_root"
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
