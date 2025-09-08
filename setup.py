@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="StudentPerformancePrediction",
+    name="StudentPerformancePrediction-end-to-end",
     version="0.1.0",
     author="Susant Kumar",
     author_email="susantkumar.sks96@gmail.com",

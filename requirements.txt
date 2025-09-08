@@ -1,8 +1,8 @@
-        pandas
-        numpy
-        seaborn
-        matplotlib
-        scikit-learn
-        xgboost
-        Flask
-        from_root
+pandas
+numpy
+seaborn
+matplotlib
+scikit-learn
+xgboost
+flask
+-e .
