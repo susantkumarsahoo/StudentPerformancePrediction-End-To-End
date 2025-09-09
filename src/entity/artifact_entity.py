@@ -7,3 +7,4 @@ class DataIngestionArtifact:
     train_data_path: str
     test_data_path: str
     metadata_path: str
+    schema_path: str

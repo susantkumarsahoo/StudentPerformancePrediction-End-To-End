@@ -6,7 +6,7 @@ from src.entity.artifact_entity import DataIngestionArtifact
 from src.entity.config_entity import DataIngestionConfig
 from src.constants.constants import (RAW_DATA_DIR, PROCESSED_DATA_DIR, SPLIT_DATA_DIR,
                        RAW_FILE_NAME, PROCESSED_FILE_NAME, TRAIN_FILE_NAME,
-                       TEST_FILE_NAME, METADATA_FILE_NAME)
+                       TEST_FILE_NAME, METADATA_FILE_NAME, SCHEMA_FILE_NAME)
 
 class DataIngestion:
     def __init__(self, config: DataIngestionConfig):
@@ -49,17 +49,28 @@ class DataIngestion:
         }
         with open(metadata_file, "w") as f:
             json.dump(metadata, f, indent=4)
+        # Schema (example schema)
+        schema_file = os.path.join(self.config.artifact_dir, SCHEMA_FILE_NAME) 
+        schema = {
+            "type": "object",
+            "properties": {
+                "feature1": {"type": "number"},
+                "feature2": {"type": "string"},
+                "target": {"type": "number"}
+            }
+        }
 
+        with open(schema_file, "w") as f:
+            json.dump(schema, f, indent=4)
+
+        # Save artifact paths
         return DataIngestionArtifact(
             raw_data_path=raw_data_file,
             processed_data_path=processed_file,
             train_data_path=train_file,
             test_data_path=test_file,
-            metadata_path=metadata_file
+            metadata_path=metadata_file,
+            schema_path=schema_file
         )
-
-
-
-
 
 
