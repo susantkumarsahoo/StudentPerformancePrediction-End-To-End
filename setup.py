@@ -1,4 +1,3 @@
-
 from setuptools import setup, find_packages
 
 setup(
@@ -12,26 +11,23 @@ setup(
     # url="https://github.com/yourusername/StudentPerformancePrediction-End-To-End",  # optional
     packages=find_packages(where="src"),
     package_dir={"": "src"},
-
-
-install_requires=[
-    "pandas",
-    "numpy",
-    "seaborn",
-    "matplotlib",
-    "scikit-learn",
-    "xgboost",
-    "Flask",
-    "from_root",          # if you really use this package
-    "pymongo",
-    "certifi",
-    "python-dotenv"
-],
-
-
+    
+    install_requires=[
+        "pandas",
+        "numpy",
+        "seaborn",
+        "matplotlib",
+        "scikit-learn",
+        "xgboost",
+        "Flask",
+        "pymongo",
+        "certifi",
+        "python-dotenv"
+    ],
+    
     classifiers=[
         "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: MIT License",   # change if you use a different license
+        "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
     python_requires=">=3.10",
