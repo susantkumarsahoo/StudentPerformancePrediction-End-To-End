@@ -5,4 +5,7 @@ matplotlib
 scikit-learn
 xgboost
 flask
+pymongo
+certifi
+python-dotenv
 -e .
