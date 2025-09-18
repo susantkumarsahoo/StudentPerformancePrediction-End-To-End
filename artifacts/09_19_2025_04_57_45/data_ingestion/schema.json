@@ -1,0 +1,14 @@
+{
+    "type": "object",
+    "properties": {
+        "feature1": {
+            "type": "number"
+        },
+        "feature2": {
+            "type": "string"
+        },
+        "target": {
+            "type": "number"
+        }
+    }
+}

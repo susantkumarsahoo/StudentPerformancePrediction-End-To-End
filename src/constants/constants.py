@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 
 ARTIFACTS_DIR = os.path.join("artifacts")
 
@@ -12,3 +13,4 @@ TRAIN_FILE_NAME = "train.csv"
 TEST_FILE_NAME = "test.csv"
 METADATA_FILE_NAME = "metadata.json"
 SCHEMA_FILE_NAME = "schema.json"
+TIMESTAMP: str = datetime.now().strftime("%m_%d_%Y_%H_%M_%S")

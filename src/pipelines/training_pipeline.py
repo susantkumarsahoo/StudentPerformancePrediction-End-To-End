@@ -10,8 +10,3 @@ class TrainingPipeline:
         ingestion_config = DataIngestionConfig(dataset_path=self.dataset_path)
         ingestion = DataIngestion(ingestion_config)
         ingestion_artifact = ingestion.initiate_data_ingestion()
-
-        print("✅ Data Ingestion Completed")
-        print(ingestion_artifact)
-
-        # (Later you can add Data Validation, Transformation, Model Training)
