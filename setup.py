@@ -22,7 +22,8 @@ setup(
         "Flask",
         "pymongo",
         "certifi",
-        "python-dotenv"
+        "python-dotenv",
+        "catboost"
     ],
     
     classifiers=[

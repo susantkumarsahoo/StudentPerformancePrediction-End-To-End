@@ -8,4 +8,5 @@ flask
 pymongo
 certifi
 python-dotenv
+catboost
 -e .
