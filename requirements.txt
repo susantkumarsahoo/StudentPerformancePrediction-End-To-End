@@ -9,4 +9,6 @@ pymongo
 certifi
 python-dotenv
 catboost
+scipy
+evidently
 -e .

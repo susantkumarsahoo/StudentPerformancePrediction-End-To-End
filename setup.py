@@ -23,7 +23,9 @@ setup(
         "pymongo",
         "certifi",
         "python-dotenv",
-        "catboost"
+        "catboost",
+        "scipy",
+        "evidently"
     ],
     
     classifiers=[
