@@ -14,3 +14,18 @@ TEST_FILE_NAME = "test.csv"
 METADATA_FILE_NAME = "metadata.json"
 SCHEMA_FILE_NAME = "schema.json"
 TIMESTAMP: str = datetime.now().strftime("%m_%d_%Y_%H_%M_%S")
+
+# Data validation Constants
+
+
+
+
+
+
+
+
+
+
+
+
+
