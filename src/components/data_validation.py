@@ -18,7 +18,7 @@ from src.constants.constants import (VALIDATION_DATA_DIR, DATA_DRIFT_REPORT_FILE
                                         MISSING_NUMERICAL_COLUMNS_FILE_NAME, 
                                         MISSING_CATEGORICAL_COLUMNS_FILE_NAME, 
                                         DATA_TYPE_FILE_NAME, 
-                                        VALIDATION_REPORT_FILE_NAME)
+                                        VALIDATION_REPORT_FILE_NAME,TIMESTAMP)
 
 
 logger = get_logger(__name__)
@@ -33,7 +33,7 @@ class DataValidation:
             
             # Create validation directory
             os.makedirs(os.path.join(self.data_validation_config.artifact_dir, 
-                                   VALIDATION_DATA_DIR), exist_ok=True)
+                                   VALIDATION_DATA_DIR,TIMESTAMP), exist_ok=True)
             
             logger.info("DataValidation initialized successfully.")
             
@@ -455,3 +455,5 @@ class DataValidation:
         except Exception as e:
             logger.error("Error occurred during data validation.", exc_info=True)
             raise CustomException(e, sys)
+        
+

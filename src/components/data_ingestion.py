@@ -1,4 +1,6 @@
-import os, json, sys
+import os
+import json
+import sys
 import pandas as pd
 from src.logging.logger import get_logger
 from src.exceptions.exception import CustomException
@@ -6,9 +8,11 @@ from sklearn.model_selection import train_test_split
 from datetime import datetime
 from src.entity.artifact_entity import DataIngestionArtifact
 from src.entity.config_entity import DataIngestionConfig
-from src.constants.constants import (RAW_DATA_DIR, PROCESSED_DATA_DIR, SPLIT_DATA_DIR,
-                       RAW_FILE_NAME, PROCESSED_FILE_NAME, TRAIN_FILE_NAME,
-                       TEST_FILE_NAME, METADATA_FILE_NAME, SCHEMA_FILE_NAME)
+from src.constants.constants import (
+    RAW_DATA_DIR, PROCESSED_DATA_DIR, SPLIT_DATA_DIR,
+    RAW_FILE_NAME, PROCESSED_FILE_NAME, TRAIN_FILE_NAME,
+    TEST_FILE_NAME, METADATA_FILE_NAME, SCHEMA_FILE_NAME
+)
 
 logger = get_logger(__name__)
 
@@ -71,16 +75,32 @@ class DataIngestion:
                 json.dump(metadata, f, indent=4)
             logger.info(f"Metadata saved at: {metadata_file}")
 
-            # Schema (example schema)
-            schema_file = os.path.join(self.config.artifact_dir, SCHEMA_FILE_NAME) 
-            schema = {
-                "type": "object",
-                "properties": {
-                    "feature1": {"type": "number"},
-                    "feature2": {"type": "string"},
-                    "target": {"type": "number"}
+            # Schema
+            schema_file = os.path.join(self.config.artifact_dir, SCHEMA_FILE_NAME)
+            schema = {"type": "object", "properties": {}}
+
+            for col in df.columns:
+                # Determine type
+                if pd.api.types.is_integer_dtype(df[col]):
+                    col_type = "integer"
+                elif pd.api.types.is_float_dtype(df[col]):
+                    col_type = "number"
+                else:
+                    col_type = "string"
+
+                # Unique values only for categorical columns
+                unique_vals = df[col].nunique() if col_type == "string" else None
+
+                # Example values: first 5 unique non-null values
+                example_vals = df[col].dropna().unique()[:5].tolist()
+
+                schema["properties"][col] = {
+                    "type": col_type,
+                    "unique_values": unique_vals,
+                    "example_values": example_vals
                 }
-            }
+
+            # Save schema to JSON
             with open(schema_file, "w") as f:
                 json.dump(schema, f, indent=4)
             logger.info(f"Schema saved at: {schema_file}")
@@ -99,6 +119,7 @@ class DataIngestion:
         except Exception as e:
             logger.error("Error occurred during data ingestion.", exc_info=True)
             raise CustomException(e, sys)
+
 
 
 

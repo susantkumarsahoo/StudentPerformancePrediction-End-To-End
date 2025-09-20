@@ -17,7 +17,7 @@ TIMESTAMP: str = datetime.now().strftime("%m_%d_%Y_%H_%M_%S")
 
 
 # Data Validation Constants
-VALIDATION_DATA_DIR = "validation"
+VALIDATION_DATA_DIR = "data_validation"
 DATA_DRIFT_REPORT_FILE_NAME = "data_drift_report.json"
 DATA_VALIDATION_STATUS_FILE = "validation_status.json"
 MISSING_COLUMNS_FILE_NAME = "missing_columns.json"

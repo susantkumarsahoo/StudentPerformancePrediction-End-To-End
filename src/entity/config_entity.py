@@ -22,7 +22,7 @@ class DataIngestionConfig:
 
 class DataValidationConfig:
     def __init__(self):
-        self.artifact_dir = os.path.join(ARTIFACTS_DIR, "data_validation", TIMESTAMP)
+        self.artifact_dir = os.path.join(ARTIFACTS_DIR)
         self.max_missing_threshold = MAX_MISSING_THRESHOLD
         self.drift_threshold = DRIFT_THRESHOLD
         self.numerical_column_threshold = NUMERICAL_COLUMN_THRESHOLD
