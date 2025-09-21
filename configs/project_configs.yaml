@@ -1,0 +1,19 @@
+ # Preprocessing parameters
+    numerical_imputation_strategy: str = "median"
+    categorical_imputation_strategy: str = "most_frequent"
+    scaling_method: str = "standard"  # Options: 'standard', 'minmax', 'robust'
+    encoding_method: str = "onehot"   # Options: 'onehot', 'label', 'target'
+    handle_outliers: bool = True
+    outlier_method: str = "iqr"       # Options: 'iqr', 'zscore'
+    feature_selection: bool = False
+    feature_selection_k: int = 10
+
+
+
+
+
+
+
+
+
+    

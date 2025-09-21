@@ -28,3 +28,19 @@ class DataValidationConfig:
         self.numerical_column_threshold = NUMERICAL_COLUMN_THRESHOLD
         self.categorical_column_threshold = CATEGORICAL_COLUMN_THRESHOLD
 
+
+
+
+class DataPreprocessingConfig:
+    """Configuration class for data preprocessing"""
+    artifacts_dir: str = ARTIFACTS_DIR
+    preprocessing_dir: str = "data_preprocessing"
+    preprocessor_file_name: str = "preprocessor.pkl"
+    transformed_train_file_name: str = "transformed_train.csv"
+    transformed_test_file_name: str = "transformed_test.csv"
+    preprocessing_report_file_name: str = "preprocessing_report.json"
+    feature_engineering_report_file_name: str = "feature_engineering_report.json"
+
+
+
+

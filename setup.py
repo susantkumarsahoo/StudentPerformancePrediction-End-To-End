@@ -25,7 +25,7 @@ setup(
         "python-dotenv",
         "catboost",
         "scipy",
-        "evidently"
+        "evidently==0.2.8"
     ],
     
     classifiers=[

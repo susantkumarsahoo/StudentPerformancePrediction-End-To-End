@@ -21,3 +21,19 @@ class DataValidationArtifact:
     validation_status_path: str
 
 
+@dataclass
+class DataPreprocessingArtifact:
+    """Artifact class for data preprocessing outputs"""
+    preprocessor_file_path: str
+    transformed_train_file_path: str
+    transformed_test_file_path: str
+    preprocessing_report_path: str
+    feature_engineering_report_path: str
+    is_preprocessing_successful: bool
+
+
+
+
+
+
+
