@@ -10,7 +10,6 @@ class DataIngestionArtifact:
     schema_path: str
 
 
-
 @dataclass
 class DataValidationArtifact:
     validation_status: bool
@@ -19,17 +18,40 @@ class DataValidationArtifact:
     missing_columns_report_path: str
     data_type_report_path: str
     validation_status_path: str
-
-
+    
 @dataclass
 class DataPreprocessingArtifact:
-    """Artifact class for data preprocessing outputs"""
-    preprocessor_file_path: str
-    transformed_train_file_path: str
-    transformed_test_file_path: str
+    preprocessor_path: str
+    transformed_train_path: str
+    transformed_test_path: str
     preprocessing_report_path: str
-    feature_engineering_report_path: str
     is_preprocessing_successful: bool
+     
+@dataclass
+class FeatureEngineeringArtifact:
+    feature_engineered_train_path: str
+    feature_engineered_test_path: str
+    feature_engineering_report_path: str
+    is_feature_engineering_successful: bool
+
+@dataclass
+class DataTransformationArtifact:
+    transformed_train_path: str
+    transformed_test_path: str
+    transformer_object_path: str
+    target_encoder_object_path: str
+    transformation_report_path: str
+    is_transformation_successful: bool
+    
+@dataclass
+class ModelTrainingArtifact:
+    model_path: str
+    training_report_path: str
+    is_model_trained: bool
+    model_accuracy: float
+
+@dataclass  
+
 
 
 

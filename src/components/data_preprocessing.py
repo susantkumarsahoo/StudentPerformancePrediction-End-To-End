@@ -13,8 +13,8 @@ from sklearn.pipeline import Pipeline
 import joblib
 import logging
 
-from constant import *
-from artifect_entity import DataIngestionArtifact, DataValidationArtifact
+from constants.constants import *
+from src.entity.artifact_entity import DataIngestionArtifact, DataValidationArtifact
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
