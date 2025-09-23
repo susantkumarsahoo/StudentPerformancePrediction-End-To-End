@@ -27,10 +27,10 @@ DATA_TYPE_FILE_NAME = "data_types.json"
 VALIDATION_REPORT_FILE_NAME = "validation_report.json"
 
 # Validation Thresholds
-MAX_MISSING_THRESHOLD = 0.7
+MAX_MISSING_THRESHOLD = 0.3
 DRIFT_THRESHOLD = 0.05
-NUMERICAL_COLUMN_THRESHOLD = 0.1
-CATEGORICAL_COLUMN_THRESHOLD = 0.1
+NUMERICAL_COLUMN_THRESHOLD = 0.5
+CATEGORICAL_COLUMN_THRESHOLD = 0.5
 
 
 # Data Preprocessing Constants
@@ -73,6 +73,16 @@ DEPLOYED_MODEL_FILE_NAME = "deployed_model.pkl"
 DEPLOYED_PREPROCESSOR_FILE_NAME = "deployed_preprocessor.pkl"
 DEPLOYED_METRICS_FILE_NAME = "deployed_model_metrics.json"
 DEPLOYED_ARTIFACTS_DIR = os.path.join("deployed_artifacts")
+
+
+# DATABASE CONSTANTS
+DATABASE_NAME = "student_performance_db"
+COLLECTION_NAME = "student_performance_collection"
+
+# LOGGING CONSTANTS
+LOG_DIR = "logs"
+LOG_FILE_NAME = "application.log"
+
 
 
 

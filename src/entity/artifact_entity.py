@@ -48,9 +48,30 @@ class ModelTrainingArtifact:
     model_path: str
     training_report_path: str
     is_model_trained: bool
-    model_accuracy: float
+    model_accuracy: float 
 
-@dataclass  
+@dataclass
+class ModelEvaluationArtifact:
+    is_model_accepted: bool
+    improved_accuracy: float
+    best_model_path: str
+    trained_model_path: str
+    model_evaluation_report_path: str
+@dataclass
+class ModelPusherArtifact:
+    deployed_model_path: str
+    deployed_transformer_path: str
+    deployed_target_encoder_path: str
+    is_model_pushed: bool
+    model_pusher_report_path: str
+@dataclass
+class TrainingPipelineArtifact:
+    data_ingestion_artifact: DataIngestionArtifact
+    data_validation_artifact: DataValidationArtifact
+    data_preprocessing_artifact: DataPreprocessingArtifact
+    feature_engineering_artifact: FeatureEngineeringArtifact
+
+
 
 
 

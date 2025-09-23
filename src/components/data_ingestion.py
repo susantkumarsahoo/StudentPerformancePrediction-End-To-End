@@ -11,8 +11,7 @@ from src.entity.config_entity import DataIngestionConfig
 from src.constants.constants import (
     RAW_DATA_DIR, PROCESSED_DATA_DIR, SPLIT_DATA_DIR,
     RAW_FILE_NAME, PROCESSED_FILE_NAME, TRAIN_FILE_NAME,
-    TEST_FILE_NAME, METADATA_FILE_NAME, SCHEMA_FILE_NAME
-)
+    TEST_FILE_NAME, METADATA_FILE_NAME, SCHEMA_FILE_NAME, TIMESTAMP )
 
 logger = get_logger(__name__)
 
@@ -25,6 +24,8 @@ class DataIngestion:
             os.makedirs(os.path.join(self.config.artifact_dir, RAW_DATA_DIR), exist_ok=True)
             os.makedirs(os.path.join(self.config.artifact_dir, PROCESSED_DATA_DIR), exist_ok=True)
             os.makedirs(os.path.join(self.config.artifact_dir, SPLIT_DATA_DIR), exist_ok=True)
+            os.makedirs(os.path.join(self.config.artifact_dir, TIMESTAMP), exist_ok=True)
+
 
             logger.info("DataIngestion initialized. Directories created successfully.")
         except Exception as e:
