@@ -2,117 +2,102 @@ import os
 import json
 import sys
 import pandas as pd
+import scipy as sp
 import numpy as np
 from datetime import datetime
 from src.logging.logger import get_logger
 from src.exceptions.exception import CustomException
 from src.entity.artifact_entity import DataIngestionArtifact, DataValidationArtifact, DataPreprocessingArtifact
 from src.entity.config_entity import DataValidationConfig, DataPreprocessingConfig
-from src.constants.constants import*
+from src.constants.constants import *
 
 
 logger = get_logger(__name__)
 
-class DataValidation:
-    def __init__(self, data_ingestion_artifact: DataIngestionArtifact, 
-                 data_validation_config: DataValidationConfig,
+class DataPreprocessing:
+    def __init__(self, data_ingestion_artifact: DataIngestionArtifact,
+                 data_validation_artifact: DataValidationArtifact,
                  data_preprocessing_config: DataPreprocessingConfig):
         try:
             self.data_ingestion_artifact = data_ingestion_artifact
+            self.data_validation_artifact = data_validation_artifact
             self.data_preprocessing_config = data_preprocessing_config
-            self.data_validation_config = data_validation_config
-            
-            # Create preprocessing directory
-            os.makedirs(os.path.join(self.data_preprocessing_config.artifact_dir,PREPROCESSING_DATA_DIR,TIMESTAMP), exist_ok=True)
-        
-            logger.info("initialized successfully.")
-            
+
+            # create dirs
+            os.makedirs(
+                os.path.join(self.data_preprocessing_config.artifact_dir, PREPROCESSING_DATA_DIR, TIMESTAMP),
+                exist_ok=True
+            )       
+            logger.info("DataPreprocessing initialized. Directories created successfully.")
         except Exception as e:
             raise CustomException(e, sys)
         
-             
-def clean_data(self, df: pd.DataFrame,
-               drop_duplicates: bool = True,
-               fill_missing_num: str = "median",   # options: "mean", "median", "mode", "zero"
-               fill_missing_cat: str = "mode",     # options: "mode", "constant"
-               outlier_method: str = "iqr",        # options: "iqr", "zscore", None
-               constant_fill_value: str = "missing") -> pd.DataFrame:
-    """
-    Simple Data Cleaning Function
 
-    Parameters
-    ----------
-    df : pd.DataFrame
-        Input raw dataset.
-    drop_duplicates : bool
-        Remove duplicate rows.
-    fill_missing_num : str
-        Strategy for numerical missing values.
-    fill_missing_cat : str
-        Strategy for categorical missing values.
-    outlier_method : str
-        Outlier removal method: "iqr", "zscore", or None.
-    constant_fill_value : str
-        Value to fill categorical missing when fill_missing_cat="constant".
+    def initiate_data_preprocessing(self) -> DataPreprocessingArtifact:
+        try:
 
-    Returns
-    -------
-    pd.DataFrame
-        Cleaned dataframe.
-    """
-    df = df.copy()
+            if not self.data_validation_artifact.validation_status:
+                error_msg = "Data validation failed. Cannot proceed to preprocessing."
+                logger.error(error_msg)
+                raise CustomException(error_msg, sys)
 
-    # Drop duplicates
-    if drop_duplicates:
-        df = df.drop_duplicates()
+            logger.info("Data validation passed. Proceeding with preprocessing...")
+            logger.info("Starting data preprocessing...")
 
-    # Handle missing values
-    for col in df.columns:
-        if df[col].dtype in ["int64", "float64"]:
-            if fill_missing_num == "mean":
-                df[col] = df[col].fillna(df[col].mean())
-            elif fill_missing_num == "median":
-                df[col] = df[col].fillna(df[col].median())
-            elif fill_missing_num == "mode":
-                df[col] = df[col].fillna(df[col].mode()[0])
-            elif fill_missing_num == "zero":
-                df[col] = df[col].fillna(0)
-        else:  # categorical
-            if fill_missing_cat == "mode":
-                df[col] = df[col].fillna(df[col].mode()[0])
-            elif fill_missing_cat == "constant":
-                df[col] = df[col].fillna(constant_fill_value)
+            # Load train and test data
+            train_df = pd.read_csv(self.data_ingestion_artifact.train_data_path)
+            test_df = pd.read_csv(self.data_ingestion_artifact.test_data_path)
+            logger.info(f"Train data shape: {train_df.shape}, Test data shape: {test_df.shape}")
 
-    # Handle outliers
-    if outlier_method == "iqr":
-        for col in df.select_dtypes(include=[np.number]).columns:
-            Q1, Q3 = df[col].quantile([0.25, 0.75])
-            IQR = Q3 - Q1
-            lower, upper = Q1 - 1.5 * IQR, Q3 + 1.5 * IQR
-            df = df[(df[col] >= lower) & (df[col] <= upper)]
-    elif outlier_method == "zscore":
-        from scipy.stats import zscore
-        for col in df.select_dtypes(include=[np.number]).columns:
-            df = df[(np.abs(zscore(df[col])) < 3)]
+            # Basic preprocessing: Fill missing values with mean for numerical columns
+            numerical_cols = train_df.select_dtypes(include=[np.number]).columns.tolist()
+            for col in numerical_cols:
+                mean_value = train_df[col].mean()
+                train_df[col] = train_df[col].fillna(mean_value)
+                test_df[col] = test_df[col].fillna(mean_value)
+                logger.info(f"Filled missing values in column '{col}' with mean value {mean_value}")
 
-    return df
+            # Save preprocessed data
+            preprocessed_train_file = os.path.join(self.data_preprocessing_config.artifact_dir,PREPROCESSING_DATA_DIR,PREPROCESSING_TRAIN_FILE_NAME)
+            preprocessed_test_file = os.path.join(self.data_preprocessing_config.artifact_dir,PREPROCESSING_DATA_DIR,PREPROCESSING_TEST_FILE_NAME)
 
-def initiate_data_preprocessing(self, DataFrame) -> DataPreprocessingArtifact:
-    
-    train_df = pd.read_csv(self.data_ingestion_artifact.train_data_path)
-    test_df = pd.read_csv(self.data_ingestion_artifact.test_data_path)
+            train_df.to_csv(preprocessed_train_file, index=False)
+            test_df.to_csv(preprocessed_test_file, index=False)
+            logger.info(f"Preprocessed train data saved at: {preprocessed_train_file}")
+            logger.info(f"Preprocessed test data saved at: {preprocessed_test_file}")
 
+            # Generate preprocessing report
+            report = {
+                "numerical_columns": numerical_cols,
+                "missing_values_filled": {col: "mean" for col in numerical_cols}
+            }
+            report_file = os.path.join(
+                self.data_preprocessing_config.artifact_dir,
+                PREPROCESSING_DATA_DIR,
+                PREPROCESSING_REPORT_FILE_NAME
+            )
+            with open(report_file, 'w') as f:
+                json.dump(report, f, indent=4)
 
+            logger.info(f"Preprocessing report saved at: {report_file}")
 
+            # Return Artifact (make sure names match DataPreprocessingArtifact in artifact_entity.py)
+            logger.info("Data preprocessing completed successfully.")
 
+            return DataPreprocessingArtifact(
+                preprocessing_train_path=preprocessed_train_file,
+                preprocessing_test_path=preprocessed_test_file,
+                preprocessing_report_path=report_file)
 
-
-
-
+        except Exception as e:
+            raise CustomException(e, sys)
 
         
+        
 
-            
+
+
+
             
             
             

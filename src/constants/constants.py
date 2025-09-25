@@ -42,7 +42,7 @@ PREPROCESSING_REPORT_FILE_NAME   = "preprocessing_report.json"
 
 
 # Feature Engineering Constants
-FEATURE_ENGINEERIN_DATA_DIR           = "feature_engineering"
+FEATURE_ENGINEERING_DATA_DIR          = "feature_engineering"
 FEATURE_ENGINEERING_TRAIN_FILE_NAME   = "feature_engineering_train.csv"
 FEATURE_ENGINEERING_TEST_FILE_NAME    = "feature_engineering_test.csv"
 FEATURE_ENGINEERING_REPORT_FILE_NAME  = "feature_engineering_report.json"
@@ -76,7 +76,9 @@ DEPLOYMENT_MODEL_REPORT_FILE_NAME      = "deployed_model_report.json"
 
 
 # DATABASE CONSTANTS
+DATABASE_DIR              = "database"
 DATABASE_NAME             = "student_performance_db"
+DATABASE_FILE_NAME        = "student_performance_db.csv"
 COLLECTION_NAME           = "student_performance_collection"
 DATABASE_REPORT_FILE_NAME = "database_report.json"
 

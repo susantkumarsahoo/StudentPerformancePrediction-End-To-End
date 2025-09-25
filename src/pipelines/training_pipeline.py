@@ -1,6 +1,10 @@
-from src.entity.config_entity import DataIngestionConfig, DataValidationConfig
+import os
+import sys
+from src.entity.artifact_entity import DataIngestionArtifact, DataValidationArtifact, DataPreprocessingArtifact
+from src.entity.config_entity import DataIngestionConfig, DataValidationConfig, DataPreprocessingConfig
 from src.components.data_ingestion import DataIngestion
 from src.components.data_validation import DataValidation
+from src.components.data_preprocessing import DataPreprocessing
 
 
 class TrainingPipeline:
@@ -20,3 +24,13 @@ class TrainingPipeline:
             data_validation_config=validation_config
         )
         validation_artifact = validation.initiate_data_validation()
+
+        # Step 3: Data Preprocessing
+        preprocessing_config = DataPreprocessingConfig()
+        preprocessing = DataPreprocessing(
+            data_ingestion_artifact=ingestion_artifact,
+            data_validation_artifact=validation_artifact,
+            data_preprocessing_config=preprocessing_config
+        )
+        preprocessing_artifact = preprocessing.initiate_data_preprocessing()
+
