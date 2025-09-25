@@ -12,13 +12,7 @@ from src.logging.logger import get_logger
 from src.exceptions.exception import CustomException
 from src.entity.artifact_entity import DataIngestionArtifact, DataValidationArtifact
 from src.entity.config_entity import DataValidationConfig
-from src.constants.constants import (VALIDATION_DATA_DIR, DATA_DRIFT_REPORT_FILE_NAME,
-                                        DATA_VALIDATION_STATUS_FILE, 
-                                        MISSING_COLUMNS_FILE_NAME,
-                                        MISSING_NUMERICAL_COLUMNS_FILE_NAME, 
-                                        MISSING_CATEGORICAL_COLUMNS_FILE_NAME, 
-                                        DATA_TYPE_FILE_NAME, 
-                                        VALIDATION_REPORT_FILE_NAME,TIMESTAMP)
+from src.constants.constants import*
 
 
 logger = get_logger(__name__)
@@ -32,9 +26,8 @@ class DataValidation:
             self.data_validation_config = data_validation_config
             
             # Create validation directory
-            os.makedirs(os.path.join(self.data_validation_config.artifact_dir, 
-                                   VALIDATION_DATA_DIR,TIMESTAMP), exist_ok=True)
-            
+            os.makedirs(os.path.join(self.data_validation_config.artifact_dir,VALIDATION_DATA_DIR,TIMESTAMP), exist_ok=True)
+        
             logger.info("DataValidation initialized successfully.")
             
         except Exception as e:

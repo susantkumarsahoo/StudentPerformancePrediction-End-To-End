@@ -8,10 +8,7 @@ from sklearn.model_selection import train_test_split
 from datetime import datetime
 from src.entity.artifact_entity import DataIngestionArtifact
 from src.entity.config_entity import DataIngestionConfig
-from src.constants.constants import (
-    RAW_DATA_DIR, PROCESSED_DATA_DIR, SPLIT_DATA_DIR,
-    RAW_FILE_NAME, PROCESSED_FILE_NAME, TRAIN_FILE_NAME,
-    TEST_FILE_NAME, METADATA_FILE_NAME, SCHEMA_FILE_NAME, TIMESTAMP )
+from src.constants.constants import*
 
 logger = get_logger(__name__)
 
