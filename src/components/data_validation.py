@@ -26,7 +26,6 @@ class DataValidation:
             self.data_validation_config = data_validation_config
             
             # Create validation directory
-            os.makedirs(os.path.join(self.data_validation_config.artifact_dir,VALIDATION_DATA_DIR,TIMESTAMP), exist_ok=True)
         
             logger.info("DataValidation initialized successfully.")
             
@@ -295,34 +294,34 @@ class DataValidation:
         """
         try:
             report_paths = {}
-            validation_dir = os.path.join(self.data_validation_config.artifact_dir, VALIDATION_DATA_DIR)
+            validation_dir = self.data_validation_config.validation_dir
             
             # Save main validation report
-            validation_report_path = os.path.join(validation_dir, VALIDATION_REPORT_FILE_NAME)
+            validation_report_path = self.data_validation_config.validation_report_path
             with open(validation_report_path, 'w') as f:
                 json.dump(validation_results, f, indent=4, default=str)
             report_paths['validation_report'] = validation_report_path
             
             # Save data drift report
-            drift_report_path = os.path.join(validation_dir, DATA_DRIFT_REPORT_FILE_NAME)
+            drift_report_path = self.data_validation_config.data_drift_report_path
             with open(drift_report_path, 'w') as f:
                 json.dump(validation_results.get('data_drift_report', {}), f, indent=4, default=str)
             report_paths['data_drift_report'] = drift_report_path
             
             # Save missing columns report
-            missing_columns_path = os.path.join(validation_dir, MISSING_COLUMNS_FILE_NAME)
+            missing_columns_path = self.data_validation_config.missing_columns_report_path
             with open(missing_columns_path, 'w') as f:
                 json.dump(validation_results.get('missing_columns', []), f, indent=4)
             report_paths['missing_columns'] = missing_columns_path
             
             # Save data type report
-            data_type_path = os.path.join(validation_dir, DATA_TYPE_FILE_NAME)
+            data_type_path = self.data_validation_config.data_type_report_path
             with open(data_type_path, 'w') as f:
                 json.dump(validation_results.get('data_type_report', {}), f, indent=4, default=str)
             report_paths['data_type'] = data_type_path
             
             # Save validation status
-            status_path = os.path.join(validation_dir, DATA_VALIDATION_STATUS_FILE)
+            status_path = self.data_validation_config.validation_status_path
             status_data = {
                 'validation_status': validation_results.get('overall_validation_status', False),
                 'timestamp': datetime.now().isoformat(),
@@ -448,5 +447,8 @@ class DataValidation:
         except Exception as e:
             logger.error("Error occurred during data validation.", exc_info=True)
             raise CustomException(e, sys)
+
+
+
         
 

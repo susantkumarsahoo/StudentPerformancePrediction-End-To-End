@@ -22,12 +22,7 @@ class DataPreprocessing:
             self.data_ingestion_artifact = data_ingestion_artifact
             self.data_validation_artifact = data_validation_artifact
             self.data_preprocessing_config = data_preprocessing_config
-
-            # create dirs
-            os.makedirs(
-                os.path.join(self.data_preprocessing_config.artifact_dir, PREPROCESSING_DATA_DIR, TIMESTAMP),
-                exist_ok=True
-            )       
+      
             logger.info("DataPreprocessing initialized. Directories created successfully.")
         except Exception as e:
             raise CustomException(e, sys)
@@ -58,9 +53,9 @@ class DataPreprocessing:
                 logger.info(f"Filled missing values in column '{col}' with mean value {mean_value}")
 
             # Save preprocessed data
-            preprocessed_train_file = os.path.join(self.data_preprocessing_config.artifact_dir,PREPROCESSING_DATA_DIR,PREPROCESSING_TRAIN_FILE_NAME)
-            preprocessed_test_file = os.path.join(self.data_preprocessing_config.artifact_dir,PREPROCESSING_DATA_DIR,PREPROCESSING_TEST_FILE_NAME)
-
+            preprocessed_train_file = self.data_preprocessing_config.preprocessing_train_path
+            preprocessed_test_file = self.data_preprocessing_config.preprocessing_test_path
+        
             train_df.to_csv(preprocessed_train_file, index=False)
             test_df.to_csv(preprocessed_test_file, index=False)
             logger.info(f"Preprocessed train data saved at: {preprocessed_train_file}")
@@ -71,11 +66,7 @@ class DataPreprocessing:
                 "numerical_columns": numerical_cols,
                 "missing_values_filled": {col: "mean" for col in numerical_cols}
             }
-            report_file = os.path.join(
-                self.data_preprocessing_config.artifact_dir,
-                PREPROCESSING_DATA_DIR,
-                PREPROCESSING_REPORT_FILE_NAME
-            )
+            report_file = self.data_preprocessing_config.preprocessing_report_path
             with open(report_file, 'w') as f:
                 json.dump(report, f, indent=4)
 

@@ -17,6 +17,7 @@ class TrainingPipeline:
         ingestion = DataIngestion(ingestion_config)
         ingestion_artifact = ingestion.initiate_data_ingestion()
 
+
         # Step 2: Data Validation
         validation_config = DataValidationConfig()
         validation = DataValidation(
@@ -24,7 +25,7 @@ class TrainingPipeline:
             data_validation_config=validation_config
         )
         validation_artifact = validation.initiate_data_validation()
-
+        
         # Step 3: Data Preprocessing
         preprocessing_config = DataPreprocessingConfig()
         preprocessing = DataPreprocessing(
@@ -33,4 +34,3 @@ class TrainingPipeline:
             data_preprocessing_config=preprocessing_config
         )
         preprocessing_artifact = preprocessing.initiate_data_preprocessing()
-
