@@ -5,14 +5,17 @@ from src.components.data_validation import DataValidation
 from src.components.data_preprocessing import DataPreprocessing
 from src.components.feature_engineering import FeatureEngineering
 from src.components.feature_transformer import FeatureTransformer
+from src.entity.model_entity import ModelTrainingConfig, ModelEvaluationConfig, ModelDeploymentConfig
+from src.models import trainer
+from src.models.trainer import ModelTrainer 
 
 
-from src.entity.artifact_entity import DataIngestionArtifact, DataValidationArtifact, DataPreprocessingArtifact, FeatureEngineeringArtifact, DataTransformationArtifact, ModelTrainingArtifact
+from src.entity.artifact_entity import DataIngestionArtifact, DataValidationArtifact, DataPreprocessingArtifact, FeatureEngineeringArtifact, DataTransformationArtifact, ModelTrainingArtifact, ModelEvaluationArtifact, ModelDeploymentArtifact
 
 
 
 
-from src.entity.config_entity import DataIngestionConfig, DataValidationConfig, DataPreprocessingConfig, FeatureEngineeringConfig, DataTransformationConfig
+from src.entity.config_entity import DataIngestionConfig, DataValidationConfig, DataPreprocessingConfig, FeatureEngineeringConfig, DataTransformationConfig, ModelTrainingConfig, ModelEvaluationConfig, ModelDeploymentConfig
 
 class TrainingPipeline:
     def __init__(self, dataset_path: str):
@@ -55,4 +58,10 @@ class TrainingPipeline:
             data_transformation_config=transformation_config
         )
         data_transformation_artifact = feature_transformation.initiate_data_transformation()
-        
+        # Step 5: Model Training
+        model_training_config = ModelTrainingConfig()
+        model_trainer = trainer.ModelTrainer(
+            model_training_config=model_training_config,
+            data_transformation_artifact=data_transformation_artifact
+        )
+        model_training_artifact = model_trainer.initiate_model_trainer()

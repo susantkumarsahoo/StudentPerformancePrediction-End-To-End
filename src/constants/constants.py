@@ -85,7 +85,7 @@ DATABASE_REPORT_FILE_NAME = "database_report.json"
 
 # LOGGING CONSTANTS
 LOG_DIR       = "logs"
-LOG_FILE_NAME = "application.log"
+LOG_REPORT_FILE_NAME = "application.log"
 
 
 

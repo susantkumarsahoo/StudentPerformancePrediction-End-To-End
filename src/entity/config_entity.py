@@ -10,9 +10,10 @@ class DataIngestionConfig:
         self.random_state = random_state
 
         # Main artifact directory for this run
-        self.ingestion_dir = os.path.join(ARTIFACTS_DIR, INGESTION_DATA_DIR, TIMESTAMP)
+        self.ingestion_dir = os.path.join(ARTIFACTS_DIR, INGESTION_DATA_DIR)
         
         # Subdirectories - Define paths first
+        self.timestamp_dir = os.path.join(self.ingestion_dir, TIMESTAMP)
         self.raw_data_dir = os.path.join(self.ingestion_dir, RAW_DATA_DIR)
         self.processed_data_dir = os.path.join(self.ingestion_dir, PROCESSED_DATA_DIR)
         self.split_data_dir = os.path.join(self.ingestion_dir, SPLIT_DATA_DIR)
@@ -22,6 +23,7 @@ class DataIngestionConfig:
         os.makedirs(self.raw_data_dir, exist_ok=True)
         os.makedirs(self.processed_data_dir, exist_ok=True)
         os.makedirs(self.split_data_dir, exist_ok=True)
+        os.makedirs(self.timestamp_dir, exist_ok=True)
 
         # File paths
         self.raw_data_path = os.path.join(self.raw_data_dir, RAW_FILE_NAME)
@@ -36,8 +38,10 @@ class DataIngestionConfig:
 class DataValidationConfig:
     def __init__(self):
         # Main artifact directory for validation
-        self.validation_dir = os.path.join(ARTIFACTS_DIR, VALIDATION_DATA_DIR, TIMESTAMP)
+        self.validation_dir = os.path.join(ARTIFACTS_DIR, VALIDATION_DATA_DIR)
+        self.timestamp_dir = os.path.join(self.validation_dir, TIMESTAMP)
         os.makedirs(self.validation_dir, exist_ok=True)
+        os.makedirs(self.timestamp_dir, exist_ok=True)
 
         # File paths
         self.validation_report_path = os.path.join(self.validation_dir, VALIDATION_REPORT_FILE_NAME)
@@ -58,10 +62,12 @@ class DataPreprocessingConfig:
     def __init__(self):
         # Main artifact directory
         
-        self.preprocessing_dir = os.path.join(ARTIFACTS_DIR, PREPROCESSING_DATA_DIR, TIMESTAMP)
+        self.preprocessing_dir = os.path.join(ARTIFACTS_DIR, PREPROCESSING_DATA_DIR)
+        self.timestamp_dir = os.path.join(self.preprocessing_dir, TIMESTAMP)
 
         # Preprocessing subdirectory
         os.makedirs(self.preprocessing_dir, exist_ok=True)
+        os.makedirs(self.timestamp_dir, exist_ok=True)
 
         # File paths
         self.preprocessing_train_path = os.path.join(self.preprocessing_dir, PREPROCESSING_TRAIN_FILE_NAME)
@@ -74,11 +80,13 @@ class FeatureEngineeringConfig:
     def __init__(self):
         # Main artifact directory
     
-        self.feature_engineering_dir = os.path.join(ARTIFACTS_DIR, FEATURE_ENGINEERING_DATA_DIR, TIMESTAMP)
+        self.feature_engineering_dir = os.path.join(ARTIFACTS_DIR, FEATURE_ENGINEERING_DATA_DIR)
+        self.timestamp_dir = os.path.join(self.feature_engineering_dir, TIMESTAMP)
         
         # Make sure the directory exists
         os.makedirs(self.feature_engineering_dir, exist_ok=True)
-        
+        os.makedirs(self.timestamp_dir, exist_ok=True)
+
         # File paths
         self.feature_engineering_train_path = os.path.join(self.feature_engineering_dir, FEATURE_ENGINEERING_TRAIN_FILE_NAME)
         self.feature_engineering_test_path = os.path.join(self.feature_engineering_dir, FEATURE_ENGINEERING_TEST_FILE_NAME)
@@ -90,24 +98,15 @@ class DataTransformationConfig:
     def __init__(self):
                 
             # Transformation subdirectory
-            self.transformer_data_dir = os.path.join(ARTIFACTS_DIR, TRANSFORMER_DATA_DIR, TIMESTAMP)
+            self.transformer_data_dir = os.path.join(ARTIFACTS_DIR, TRANSFORMER_DATA_DIR)
+            self.timestamp_dir = os.path.join(self.transformer_data_dir, TIMESTAMP)
+            # Make sure the directory exists
             os.makedirs(self.transformer_data_dir, exist_ok=True)
+            os.makedirs(self.timestamp_dir, exist_ok=True)
 
             # File paths
             self.transformer_train_path = os.path.join(self.transformer_data_dir, TRANSFORMER_TRAIN_FILE_NAME)
             self.transformer_test_path = os.path.join(self.transformer_data_dir, TRANSFORMER_TEST_FILE_NAME)
             self.transformer_object_path = os.path.join(self.transformer_data_dir, TRANSFORMER_OBJECT_FILE_NAME)
             self.transformer_report_path = os.path.join(self.transformer_data_dir, TRANSFORMER_REPORT_FILE_NAME)
-
-
-# Configuration class for model training
-class ModelTrainingConfig:
-    def __init__(self):
-        # Main artifact directory for model training
-        self.model_training_dir = os.path.join(ARTIFACTS_DIR, MODEL_TRAINING_DIR, TIMESTAMP)
-        os.makedirs(self.model_training_dir, exist_ok=True)
-
-        # File paths
-        self.best_model_path = os.path.join(self.model_training_dir, BEST_MODEL_FILE_NAME)
-        self.model_evaluation_report_path = os.path.join(self.model_training_dir, MODEL_REPORT_FILE_NAME)
 

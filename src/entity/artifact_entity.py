@@ -57,7 +57,7 @@ class ModelEvaluationArtifact:
 # Model Deployment Artifact
 @dataclass
 class ModelDeploymentArtifact:
-    deployed_model_path: str
+    deployment_model_path: str
     deployment_status: bool
     deployment_preprocessor_path: str
     deployment_report_path: str
