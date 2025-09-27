@@ -1,11 +1,18 @@
 import os
 import sys
-from src.entity.artifact_entity import DataIngestionArtifact, DataValidationArtifact, DataPreprocessingArtifact
-from src.entity.config_entity import DataIngestionConfig, DataValidationConfig, DataPreprocessingConfig
 from src.components.data_ingestion import DataIngestion
 from src.components.data_validation import DataValidation
 from src.components.data_preprocessing import DataPreprocessing
+from src.components.feature_engineering import FeatureEngineering
+from src.components.feature_transformer import FeatureTransformer
 
+
+from src.entity.artifact_entity import DataIngestionArtifact, DataValidationArtifact, DataPreprocessingArtifact, FeatureEngineeringArtifact, DataTransformationArtifact, ModelTrainingArtifact
+
+
+
+
+from src.entity.config_entity import DataIngestionConfig, DataValidationConfig, DataPreprocessingConfig, FeatureEngineeringConfig, DataTransformationConfig
 
 class TrainingPipeline:
     def __init__(self, dataset_path: str):
@@ -34,3 +41,18 @@ class TrainingPipeline:
             data_preprocessing_config=preprocessing_config
         )
         preprocessing_artifact = preprocessing.initiate_data_preprocessing()
+        # Step 4: Feature Engineering
+        feature_engineering_config = FeatureEngineeringConfig()
+        feature_engineering = FeatureEngineering(
+            data_preprocessing_artifact=preprocessing_artifact,
+            feature_engineering_config=feature_engineering_config
+        )
+        feature_engineering_artifact = feature_engineering.initiate_feature_engineering()
+        # Further steps like Data Transformation
+        transformation_config = DataTransformationConfig()
+        feature_transformation = FeatureTransformer(
+            feature_engineering_artifact=feature_engineering_artifact,
+            data_transformation_config=transformation_config
+        )
+        data_transformation_artifact = feature_transformation.initiate_data_transformation()
+        

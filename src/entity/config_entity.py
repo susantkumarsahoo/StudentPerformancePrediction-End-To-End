@@ -80,9 +80,9 @@ class FeatureEngineeringConfig:
         os.makedirs(self.feature_engineering_dir, exist_ok=True)
         
         # File paths
-        self.feature_engineering_train_file = os.path.join(self.feature_engineering_dir, FEATURE_ENGINEERING_TRAIN_FILE_NAME)
-        self.feature_engineering_test_file = os.path.join(self.feature_engineering_dir, FEATURE_ENGINEERING_TEST_FILE_NAME)
-        self.feature_engineering_report_file = os.path.join(self.feature_engineering_dir, FEATURE_ENGINEERING_REPORT_FILE_NAME)
+        self.feature_engineering_train_path = os.path.join(self.feature_engineering_dir, FEATURE_ENGINEERING_TRAIN_FILE_NAME)
+        self.feature_engineering_test_path = os.path.join(self.feature_engineering_dir, FEATURE_ENGINEERING_TEST_FILE_NAME)
+        self.feature_engineering_report_path = os.path.join(self.feature_engineering_dir, FEATURE_ENGINEERING_REPORT_FILE_NAME)
 
 
 # Configuration class for data transformation

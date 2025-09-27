@@ -1,0 +1,204 @@
+{
+    "train": {
+        "shape": [
+            800,
+            23
+        ],
+        "null_values": 0,
+        "columns": [
+            {
+                "column": 0,
+                "dtype": "float64"
+            },
+            {
+                "column": 1,
+                "dtype": "float64"
+            },
+            {
+                "column": 2,
+                "dtype": "float64"
+            },
+            {
+                "column": 3,
+                "dtype": "float64"
+            },
+            {
+                "column": 4,
+                "dtype": "float64"
+            },
+            {
+                "column": 5,
+                "dtype": "float64"
+            },
+            {
+                "column": 6,
+                "dtype": "float64"
+            },
+            {
+                "column": 7,
+                "dtype": "float64"
+            },
+            {
+                "column": 8,
+                "dtype": "float64"
+            },
+            {
+                "column": 9,
+                "dtype": "float64"
+            },
+            {
+                "column": 10,
+                "dtype": "float64"
+            },
+            {
+                "column": 11,
+                "dtype": "float64"
+            },
+            {
+                "column": 12,
+                "dtype": "float64"
+            },
+            {
+                "column": 13,
+                "dtype": "float64"
+            },
+            {
+                "column": 14,
+                "dtype": "float64"
+            },
+            {
+                "column": 15,
+                "dtype": "float64"
+            },
+            {
+                "column": 16,
+                "dtype": "float64"
+            },
+            {
+                "column": 17,
+                "dtype": "float64"
+            },
+            {
+                "column": 18,
+                "dtype": "float64"
+            },
+            {
+                "column": 19,
+                "dtype": "float64"
+            },
+            {
+                "column": 20,
+                "dtype": "float64"
+            },
+            {
+                "column": 21,
+                "dtype": "float64"
+            },
+            {
+                "column": 22,
+                "dtype": "float64"
+            }
+        ]
+    },
+    "test": {
+        "shape": [
+            200,
+            23
+        ],
+        "null_values": 0,
+        "columns": [
+            {
+                "column": 0,
+                "dtype": "float64"
+            },
+            {
+                "column": 1,
+                "dtype": "float64"
+            },
+            {
+                "column": 2,
+                "dtype": "float64"
+            },
+            {
+                "column": 3,
+                "dtype": "float64"
+            },
+            {
+                "column": 4,
+                "dtype": "float64"
+            },
+            {
+                "column": 5,
+                "dtype": "float64"
+            },
+            {
+                "column": 6,
+                "dtype": "float64"
+            },
+            {
+                "column": 7,
+                "dtype": "float64"
+            },
+            {
+                "column": 8,
+                "dtype": "float64"
+            },
+            {
+                "column": 9,
+                "dtype": "float64"
+            },
+            {
+                "column": 10,
+                "dtype": "float64"
+            },
+            {
+                "column": 11,
+                "dtype": "float64"
+            },
+            {
+                "column": 12,
+                "dtype": "float64"
+            },
+            {
+                "column": 13,
+                "dtype": "float64"
+            },
+            {
+                "column": 14,
+                "dtype": "float64"
+            },
+            {
+                "column": 15,
+                "dtype": "float64"
+            },
+            {
+                "column": 16,
+                "dtype": "float64"
+            },
+            {
+                "column": 17,
+                "dtype": "float64"
+            },
+            {
+                "column": 18,
+                "dtype": "float64"
+            },
+            {
+                "column": 19,
+                "dtype": "float64"
+            },
+            {
+                "column": 20,
+                "dtype": "float64"
+            },
+            {
+                "column": 21,
+                "dtype": "float64"
+            },
+            {
+                "column": 22,
+                "dtype": "float64"
+            }
+        ]
+    }
+}
