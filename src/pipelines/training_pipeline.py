@@ -23,6 +23,7 @@ from src.entity.model_entity import ModelTrainingConfig
 
 
 class TrainingPipeline:
+
     def __init__(self, dataset_path: str):
         self.dataset_path = dataset_path
 
@@ -63,6 +64,8 @@ class TrainingPipeline:
             data_transformation_config=transformation_config
         )
         data_transformation_artifact = feature_transformation.initiate_data_transformation()
+
+
         # Step 5: Model Training
         model_training_config = ModelTrainingConfig()
         model_trainer = ModelTrainer(
@@ -70,3 +73,5 @@ class TrainingPipeline:
             data_transformation_artifact=data_transformation_artifact
         )
         model_training_artifact = model_trainer.initiate_model_trainer()
+
+        return model_training_artifact

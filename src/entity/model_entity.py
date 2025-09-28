@@ -36,7 +36,7 @@ class ModelEvaluationConfig:
 class ModelDeploymentConfig:
     def __init__(self):
         # Main artifact directory for model deployment
-        self.model_deployment_dir = os.path.join(ARTIFACTS_DIR, MODEL_DEPLOYMENT_DIR)
+        self.model_deployment_dir = os.path.join(MODEL_DEPLOYMENT_DIR, MODEL_DEPLOYMENT_DIR)
         self.timestamp_dir = os.path.join(self.model_deployment_dir, TIMESTAMP)
 
         # Make sure the directory exists
