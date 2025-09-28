@@ -2,100 +2,78 @@
     "train": {
         "shape": [
             800,
-            23
+            11
         ],
         "null_values": 0,
         "columns": [
             {
-                "column": 0,
+                "column": "gender",
+                "dtype": "object",
+                "top_categories": {
+                    "female": 421,
+                    "male": 379
+                }
+            },
+            {
+                "column": "race_ethnicity",
+                "dtype": "object",
+                "top_categories": {
+                    "group C": 260,
+                    "group D": 202,
+                    "group B": 153,
+                    "group E": 116,
+                    "group A": 69
+                }
+            },
+            {
+                "column": "parental_level_of_education",
+                "dtype": "object",
+                "top_categories": {
+                    "some college": 182,
+                    "associate's degree": 179,
+                    "high school": 159,
+                    "some high school": 137,
+                    "bachelor's degree": 96
+                }
+            },
+            {
+                "column": "lunch",
+                "dtype": "object",
+                "top_categories": {
+                    "standard": 523,
+                    "free/reduced": 277
+                }
+            },
+            {
+                "column": "test_preparation_course",
+                "dtype": "object",
+                "top_categories": {
+                    "none": 521,
+                    "completed": 279
+                }
+            },
+            {
+                "column": "math_score",
                 "dtype": "float64"
             },
             {
-                "column": 1,
+                "column": "reading_score",
                 "dtype": "float64"
             },
             {
-                "column": 2,
+                "column": "writing_score",
                 "dtype": "float64"
             },
             {
-                "column": 3,
+                "column": "math_score reading_score",
                 "dtype": "float64"
             },
             {
-                "column": 4,
+                "column": "math_score writing_score",
                 "dtype": "float64"
             },
             {
-                "column": 5,
-                "dtype": "float64"
-            },
-            {
-                "column": 6,
-                "dtype": "float64"
-            },
-            {
-                "column": 7,
-                "dtype": "float64"
-            },
-            {
-                "column": 8,
-                "dtype": "float64"
-            },
-            {
-                "column": 9,
-                "dtype": "float64"
-            },
-            {
-                "column": 10,
-                "dtype": "float64"
-            },
-            {
-                "column": 11,
-                "dtype": "float64"
-            },
-            {
-                "column": 12,
-                "dtype": "float64"
-            },
-            {
-                "column": 13,
-                "dtype": "float64"
-            },
-            {
-                "column": 14,
-                "dtype": "float64"
-            },
-            {
-                "column": 15,
-                "dtype": "float64"
-            },
-            {
-                "column": 16,
-                "dtype": "float64"
-            },
-            {
-                "column": 17,
-                "dtype": "float64"
-            },
-            {
-                "column": 18,
-                "dtype": "float64"
-            },
-            {
-                "column": 19,
-                "dtype": "float64"
-            },
-            {
-                "column": 20,
-                "dtype": "float64"
-            },
-            {
-                "column": 21,
-                "dtype": "float64"
-            },
-            {
-                "column": 22,
+                "column": "reading_score writing_score",
                 "dtype": "float64"
             }
         ]
@@ -103,100 +81,78 @@
     "test": {
         "shape": [
             200,
-            23
+            11
         ],
         "null_values": 0,
         "columns": [
             {
-                "column": 0,
+                "column": "gender",
+                "dtype": "object",
+                "top_categories": {
+                    "male": 103,
+                    "female": 97
+                }
+            },
+            {
+                "column": "race_ethnicity",
+                "dtype": "object",
+                "top_categories": {
+                    "group D": 60,
+                    "group C": 59,
+                    "group B": 37,
+                    "group E": 24,
+                    "group A": 20
+                }
+            },
+            {
+                "column": "parental_level_of_education",
+                "dtype": "object",
+                "top_categories": {
+                    "some college": 44,
+                    "associate's degree": 43,
+                    "some high school": 42,
+                    "high school": 37,
+                    "bachelor's degree": 22
+                }
+            },
+            {
+                "column": "lunch",
+                "dtype": "object",
+                "top_categories": {
+                    "standard": 122,
+                    "free/reduced": 78
+                }
+            },
+            {
+                "column": "test_preparation_course",
+                "dtype": "object",
+                "top_categories": {
+                    "none": 121,
+                    "completed": 79
+                }
+            },
+            {
+                "column": "math_score",
                 "dtype": "float64"
             },
             {
-                "column": 1,
+                "column": "reading_score",
                 "dtype": "float64"
             },
             {
-                "column": 2,
+                "column": "writing_score",
                 "dtype": "float64"
             },
             {
-                "column": 3,
+                "column": "math_score reading_score",
                 "dtype": "float64"
             },
             {
-                "column": 4,
+                "column": "math_score writing_score",
                 "dtype": "float64"
             },
             {
-                "column": 5,
-                "dtype": "float64"
-            },
-            {
-                "column": 6,
-                "dtype": "float64"
-            },
-            {
-                "column": 7,
-                "dtype": "float64"
-            },
-            {
-                "column": 8,
-                "dtype": "float64"
-            },
-            {
-                "column": 9,
-                "dtype": "float64"
-            },
-            {
-                "column": 10,
-                "dtype": "float64"
-            },
-            {
-                "column": 11,
-                "dtype": "float64"
-            },
-            {
-                "column": 12,
-                "dtype": "float64"
-            },
-            {
-                "column": 13,
-                "dtype": "float64"
-            },
-            {
-                "column": 14,
-                "dtype": "float64"
-            },
-            {
-                "column": 15,
-                "dtype": "float64"
-            },
-            {
-                "column": 16,
-                "dtype": "float64"
-            },
-            {
-                "column": 17,
-                "dtype": "float64"
-            },
-            {
-                "column": 18,
-                "dtype": "float64"
-            },
-            {
-                "column": 19,
-                "dtype": "float64"
-            },
-            {
-                "column": 20,
-                "dtype": "float64"
-            },
-            {
-                "column": 21,
-                "dtype": "float64"
-            },
-            {
-                "column": 22,
+                "column": "reading_score writing_score",
                 "dtype": "float64"
             }
         ]

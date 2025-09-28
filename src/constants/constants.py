@@ -50,8 +50,8 @@ FEATURE_ENGINEERING_REPORT_FILE_NAME  = "feature_engineering_report.json"
 
 # Data Transformation Constants
 TRANSFORMER_DATA_DIR            = "data_transformation"
-TRANSFORMER_TRAIN_FILE_NAME     = "transformer_train.csv"
-TRANSFORMER_TEST_FILE_NAME      = "transformer_test.csv"
+TRANSFORMER_TRAIN_FILE_NAME     = "transformer_train.npy"
+TRANSFORMER_TEST_FILE_NAME      = "transformer_test.npy"
 TRANSFORMER_OBJECT_FILE_NAME    = "transformer_preprocessor.pkl"
 TRANSFORMER_REPORT_FILE_NAME    = "transformer_report.json"
 

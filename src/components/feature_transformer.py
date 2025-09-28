@@ -65,17 +65,21 @@ class FeatureTransformer:
             X_train = preprocessor.fit_transform(train_df)
             X_test = preprocessor.transform(test_df)
 
-            X_train = pd.DataFrame(X_train)
-            X_test = pd.DataFrame(X_test)
+            # ✅ Already NumPy arrays, no need to call .to_numpy()
+            X_train_arr = X_train
+            X_test_arr = X_test
+
+            # ✅ Save the NumPy Arrays
+            np.save(self.data_transformation_config.transformer_train_path, X_train_arr)
+            np.save(self.data_transformation_config.transformer_test_path, X_test_arr)
 
             logger.info("Saving transformed datasets and transformer object.")
-            X_train.to_csv(self.data_transformation_config.transformer_train_path, index=False)
-            X_test.to_csv(self.data_transformation_config.transformer_test_path, index=False)
             joblib.dump(preprocessor, self.data_transformation_config.transformer_object_path)
 
+            # ⚠️ Report should be generated from original DataFrames, not arrays
             transformation_report = {
-                "train": self.generate_transformation_report(X_train),
-                "test": self.generate_transformation_report(X_test)
+                "train": self.generate_transformation_report(train_df),
+                "test": self.generate_transformation_report(test_df)
             }
 
             with open(self.data_transformation_config.transformer_report_path, "w") as f:
@@ -92,6 +96,7 @@ class FeatureTransformer:
 
         except Exception as e:
             raise CustomException(e, sys)
+
 
 
 
