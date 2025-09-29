@@ -50,7 +50,7 @@ list_of_files = [
     f"{project_name}/entity/__init__.py",
     f"{project_name}/entity/artifact_entity.py",
     f"{project_name}/entity/config_entity.py",
-    f"{project_name}/entity/model_entity.py",
+    f"{project_name}/entity/model_config_entity.py",
 
     # Project-specific components
     f"{project_name}/components/__init__.py",

@@ -1,19 +1,23 @@
-from src.pipelines.training_pipeline import TrainingPipeline
-from src.pipelines.deployment_pipeline import DeploymentPipeline
+import os
+from src.pipelines.prediction_pipeline import PredictionPipeline
+
+
 
 # Correct dataset path
-dataset_path = r"C:\Users\LENOVO\MachineLearningProhects\StudentPerformancePrediction-End-To-End\data\raw\student.csv"
+# Candidate paths
+path1 = r"C:\Users\LENOVO\MachineLearningProhects\StudentPerformancePrediction-End-To-End\data\raw\student.csv"
+path2 = r"C:\Users\TPWODL\New folder_Content\StudentPerformancePrediction-End-To-End\data\raw\student.csv"
 
-# Initialize and run the training pipeline
+# Condition check
+if os.path.exists(path1):
+    dataset_path = path1
+elif os.path.exists(path2):
+    dataset_path = path2
+else:
+    raise FileNotFoundError("❌ student.csv not found in either path!")
 
-'''
-deployment_pipeline = DeploymentPipeline(dataset_path=dataset_path)
-deployment_pipeline.run_deployment_pipeline()
-
-'''
-
-pipeline = TrainingPipeline(dataset_path=dataset_path)
-pipe = pipeline.run_pipeline()
+pipeline = PredictionPipeline(dataset_path=dataset_path)
+pipeline.run_prediction_pipeline()
 
 
 

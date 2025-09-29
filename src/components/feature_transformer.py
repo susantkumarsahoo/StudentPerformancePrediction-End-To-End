@@ -7,11 +7,17 @@ import joblib
 from sklearn.preprocessing import StandardScaler, RobustScaler, OneHotEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
+from src.entity.artifact_entity import (DataIngestionArtifact, DataValidationArtifact, DataPreprocessingArtifact, 
+                                        FeatureEngineeringArtifact, DataTransformationArtifact, ModelTrainingArtifact, 
+                                        ModelDeploymentArtifact, ModelEvaluationArtifact)
+
+from src.entity.config_entity import (DataIngestionConfig, DataValidationConfig, DataPreprocessingConfig, 
+                                      FeatureEngineeringConfig, DataTransformationConfig)
+
+from src.entity.model_config_entity import (ModelTrainingConfig,ModelEvaluationConfig,ModelDeploymentConfig)
 
 from src.exceptions.exception import CustomException
 from src.logging.logger import get_logger
-from src.entity.artifact_entity import FeatureEngineeringArtifact, DataTransformationArtifact
-from src.entity.config_entity import DataTransformationConfig
 
 logger = get_logger(__name__)
 

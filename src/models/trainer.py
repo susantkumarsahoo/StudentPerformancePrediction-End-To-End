@@ -4,8 +4,17 @@ import joblib
 import json
 import numpy as np
 from src.constants.constants import *
-from src.entity.model_entity import ModelTrainingConfig
-from src.entity.artifact_entity import DataTransformationArtifact, ModelTrainingArtifact
+
+
+from src.entity.artifact_entity import (DataIngestionArtifact, DataValidationArtifact, DataPreprocessingArtifact, 
+                                        FeatureEngineeringArtifact, DataTransformationArtifact, ModelTrainingArtifact, 
+                                        ModelDeploymentArtifact, ModelEvaluationArtifact)
+
+from src.entity.config_entity import (DataIngestionConfig, DataValidationConfig, DataPreprocessingConfig, 
+                                      FeatureEngineeringConfig, DataTransformationConfig)
+
+from src.entity.model_config_entity import (ModelTrainingConfig,ModelEvaluationConfig,ModelDeploymentConfig)
+
 from src.exceptions.exception import CustomException
 from src.logging.logger import get_logger
 from sklearn.linear_model import Lasso

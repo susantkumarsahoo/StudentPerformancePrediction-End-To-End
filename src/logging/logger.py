@@ -2,7 +2,7 @@ import logging
 import os
 from datetime import datetime
 from src.constants.constants import*
-from src.entity.model_entity import LoggingConfig
+from src.entity.model_config_entity import LoggingConfig
 from src.entity.artifact_entity import LoggingArtifact
 
 

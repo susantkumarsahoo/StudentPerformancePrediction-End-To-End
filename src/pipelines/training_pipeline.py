@@ -20,7 +20,7 @@ from src.entity.config_entity import (DataIngestionConfig, DataValidationConfig,
                                       DataPreprocessingConfig, FeatureEngineeringConfig, 
                                       DataTransformationConfig)
 
-from src.entity.model_entity import ModelTrainingConfig, ModelDeploymentConfig
+from src.entity.model_config_entity import ModelTrainingConfig, ModelDeploymentConfig
 
 
 class TrainingPipeline:
