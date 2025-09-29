@@ -89,10 +89,12 @@ class ModelRegistry:
                 deployment_model_path=self.model_deployment_config.deployment_model_path,
                 deployment_preprocessor_path=self.model_deployment_config.deployment_preprocessor_path,
                 deployment_report_path=self.model_deployment_config.deployment_report_path,
-                status="Success"
+                deployment_status=True
             )
 
             logger.info(f"ModelDeploymentArtifact created: {model_deployment_artifact}")
+            logger.info(f"ModelDeploymentArtifact saved at: {os.path.abspath(model_deployment_artifact.deployment_report_path)}")
+            logger.info(f"ModelDeploymentArtifact saved successfully")
             return model_deployment_artifact
 
         except Exception as e:

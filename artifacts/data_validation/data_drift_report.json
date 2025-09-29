@@ -1,0 +1,20 @@
+{
+    "math_score": {
+        "ks_statistic": 0.055,
+        "p_value": 0.7060645535776577,
+        "drift_detected": "False",
+        "threshold": 0.05
+    },
+    "reading_score": {
+        "ks_statistic": 0.0575,
+        "p_value": 0.6528677473823293,
+        "drift_detected": "False",
+        "threshold": 0.05
+    },
+    "writing_score": {
+        "ks_statistic": 0.0625,
+        "p_value": 0.5473070089291436,
+        "drift_detected": "False",
+        "threshold": 0.05
+    }
+}

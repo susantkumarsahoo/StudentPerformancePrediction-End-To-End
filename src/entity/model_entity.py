@@ -36,12 +36,13 @@ class ModelEvaluationConfig:
 class ModelDeploymentConfig:
     def __init__(self):
         # Main artifact directory for model deployment
-        self.model_deployment_dir = os.path.join(MODEL_DEPLOYMENT_DIR, MODEL_DEPLOYMENT_DIR)
+        self.model_deployment_dir = os.path.join(DEPLOYMENT_DIR, DEPLOYMENT_MODEL_DIR)
         self.timestamp_dir = os.path.join(self.model_deployment_dir, TIMESTAMP)
 
         # Make sure the directory exists
         os.makedirs(self.model_deployment_dir, exist_ok=True)
         os.makedirs(self.timestamp_dir, exist_ok=True)
+
 
         # File paths
         self.deployment_model_path = os.path.join(self.model_deployment_dir, DEPLOYMENT_MODEL_FILE_NAME)
@@ -70,7 +71,7 @@ class DatabaseConfig:
 class LoggingConfig:
     def __init__(self):
         # Main artifact directory for logging
-        self.log_dir = os.path.join(ARTIFACTS_DIR, LOG_DIR)
+        self.log_dir = os.path.join( LOG_DIR,LOG_LOGGER)
         self.timestamp_dir = os.path.join(self.log_dir, TIMESTAMP)
 
         # Make sure the directory exists

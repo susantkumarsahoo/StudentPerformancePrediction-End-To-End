@@ -6,6 +6,7 @@ from src.components.data_preprocessing import DataPreprocessing
 from src.components.feature_engineering import FeatureEngineering
 from src.components.feature_transformer import FeatureTransformer
 from src.models.trainer import ModelTrainer
+from src.models.model_registry import ModelRegistry
 
 
 
@@ -17,9 +18,9 @@ from src.entity.artifact_entity import (DataIngestionArtifact, DataValidationArt
 
 from src.entity.config_entity import (DataIngestionConfig, DataValidationConfig, 
                                       DataPreprocessingConfig, FeatureEngineeringConfig, 
-                                      DataTransformationConfig )
+                                      DataTransformationConfig)
 
-from src.entity.model_entity import ModelTrainingConfig
+from src.entity.model_entity import ModelTrainingConfig, ModelDeploymentConfig
 
 
 class TrainingPipeline:
@@ -73,5 +74,24 @@ class TrainingPipeline:
             data_transformation_artifact=data_transformation_artifact
         )
         model_training_artifact = model_trainer.initiate_model_trainer()
+        
+        
+        # Step 5: Model Training
+        model_training_config = ModelTrainingConfig()
+        model_trainer = ModelTrainer(
+            model_training_config=model_training_config,
+            data_transformation_artifact=data_transformation_artifact
+        )
+        model_training_artifact = model_trainer.initiate_model_trainer()
+        
+        # model deployment
+        model_deployment_config = ModelDeploymentConfig()
+        model_registry = ModelRegistry(
+            model_deployment_config=model_deployment_config,
+            data_transformation_artifact=data_transformation_artifact,
+            model_training_artifact=model_training_artifact
+        )
+        model_registry.save_model_and_preprocessor()
+        model_deployment_artifact = model_registry.initiate_model_registry()
+        return model_deployment_artifact
 
-        return model_training_artifact

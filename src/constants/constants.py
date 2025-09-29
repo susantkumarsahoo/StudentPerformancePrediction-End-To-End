@@ -68,11 +68,11 @@ MODEL_EVALUATION_REPORT_FILE_NAME = "model_evaluation_report.json"
 
 
 # Model Deployment Constants
-MODEL_DEPLOYMENT_DIR            = "model_deployment"
-DEPLOYMENT_MODEL_DIR              = "deployed_model"
-DEPLOYMENT_MODEL_FILE_NAME        = "deployed_model.pkl"
+DEPLOYMENT_DIR                    = "deployment_artifacts"
+DEPLOYMENT_MODEL_DIR              = "model"
+DEPLOYMENT_MODEL_FILE_NAME        = "best_model.pkl"
 DEPLOYMENT_PREPROCESSOR_FILE_NAME = "deployed_preprocessor.pkl"
-DEPLOYMENT_MODEL_REPORT_FILE_NAME      = "deployed_model_report.json"
+DEPLOYMENT_MODEL_REPORT_FILE_NAME = "deployed_model_report.json"
 
 
 # DATABASE CONSTANTS
@@ -85,6 +85,7 @@ DATABASE_REPORT_FILE_NAME = "database_report.json"
 
 # LOGGING CONSTANTS
 LOG_DIR       = "logs"
+LOG_LOGGER    = "logger"
 LOG_REPORT_FILE_NAME = "application.log"
 
 
