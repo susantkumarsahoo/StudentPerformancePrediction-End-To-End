@@ -9,7 +9,6 @@ from src.logging.logger import get_logger
 from src.exceptions.exception import CustomException
 from src.entity.artifact_entity import DataIngestionArtifact, DataValidationArtifact, DataPreprocessingArtifact
 from src.entity.config_entity import DataValidationConfig, DataPreprocessingConfig
-from src.constants.constants import *
 
 
 logger = get_logger(__name__)

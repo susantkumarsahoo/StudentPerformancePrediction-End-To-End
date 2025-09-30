@@ -7,20 +7,44 @@ from src.components.feature_engineering import FeatureEngineering
 from src.components.feature_transformer import FeatureTransformer
 from src.models.trainer import ModelTrainer
 from src.models.model_registry import ModelRegistry
+from src.models.predictor import ModelPredictor
+
+
+# training_pipeline.py
+input_data = {
+    'gender': 'female',
+    'race_ethnicity': 'group B',
+    'parental_level_of_education': "bachelor's degree",
+    'lunch': 'standard',
+    'test_preparation_course': 'completed',
+    'reading_score': 72,
+    'writing_score': 74
+}
 
 
 
-from src.entity.artifact_entity import (DataIngestionArtifact, DataValidationArtifact, 
-                                        DataPreprocessingArtifact, FeatureEngineeringArtifact, 
-                                        DataTransformationArtifact,ModelTrainingArtifact )
+from src.entity.artifact_entity import (
+    DataIngestionArtifact, 
+    DataValidationArtifact, 
+    DataPreprocessingArtifact, 
+    FeatureEngineeringArtifact, 
+    DataTransformationArtifact,
+    ModelTrainingArtifact, 
+    ModelDeploymentArtifact)
 
+from src.entity.config_entity import (
+    DataIngestionConfig, 
+    DataValidationConfig, 
+    DataPreprocessingConfig, 
+    FeatureEngineeringConfig, 
+    DataTransformationConfig
+)
 
-
-from src.entity.config_entity import (DataIngestionConfig, DataValidationConfig, 
-                                      DataPreprocessingConfig, FeatureEngineeringConfig, 
-                                      DataTransformationConfig)
-
-from src.entity.model_config_entity import ModelTrainingConfig, ModelDeploymentConfig
+from src.entity.model_config_entity import (
+    ModelTrainingConfig, 
+    ModelDeploymentConfig, 
+    ModelEvaluationConfig
+)
 
 
 class TrainingPipeline:
@@ -93,5 +117,10 @@ class TrainingPipeline:
         )
         model_registry.save_model_and_preprocessor()
         model_deployment_artifact = model_registry.initiate_model_registry()
-        return model_deployment_artifact
+        
+        # model predictor
+        model_predictor = ModelPredictor(
+            model_deployment_artifact=model_deployment_artifact
+        )
+        model_predictor.predict(input_data)
 

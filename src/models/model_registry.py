@@ -3,17 +3,27 @@ import sys
 import json
 import joblib
 from datetime import datetime
-from src.entity.artifact_entity import DataTransformationArtifact
-from src.entity.artifact_entity import ModelTrainingArtifact
-from src.entity.artifact_entity import ModelDeploymentArtifact
-from src.entity.model_config_entity import ModelDeploymentConfig
-
 from src.logging.logger import get_logger
 from src.exceptions.exception import CustomException
 
+from src.entity.artifact_entity import (
+    DataIngestionArtifact, 
+    DataValidationArtifact, 
+    DataPreprocessingArtifact, 
+    FeatureEngineeringArtifact, 
+    DataTransformationArtifact,
+    ModelTrainingArtifact, 
+    ModelDeploymentArtifact
+)
+
+from src.entity.model_config_entity import (
+    ModelTrainingConfig, 
+    ModelDeploymentConfig, 
+    ModelEvaluationConfig
+)
+
 
 logger = get_logger(__name__)
-
 
 
 class ModelRegistry:
@@ -31,22 +41,26 @@ class ModelRegistry:
             self.model_deployment_config = model_deployment_config
             self.data_transformation_artifact = data_transformation_artifact
             self.model_training_artifact = model_training_artifact
-            logger.info("ModelRegistry initialized successfully.")
+            logger.info("✅ ModelRegistry initialized successfully.")
         except Exception as e:
             raise CustomException(e, sys)
 
     def save_model_and_preprocessor(self):
         """
-        Save trained model and preprocessor to deployment paths.
+        Save trained model and preprocessor objects to deployment paths.
         """
         try:
-            # Save model
-            model_obj = self.model_training_artifact.best_model_path
+            # Load the actual trained model object
+            if not os.path.exists(self.model_training_artifact.best_model_path):
+                raise FileNotFoundError(f"Trained model not found: {self.model_training_artifact.best_model_path}")
+            model_obj = joblib.load(self.model_training_artifact.best_model_path)
             joblib.dump(model_obj, self.model_deployment_config.deployment_model_path)
             logger.info(f"Model saved successfully at: {self.model_deployment_config.deployment_model_path}")
 
-            # Save preprocessor
-            preprocessor_obj = self.data_transformation_artifact.transformer_object_path
+            # Load the actual preprocessor object
+            if not os.path.exists(self.data_transformation_artifact.transformer_object_path):
+                raise FileNotFoundError(f"Preprocessor not found: {self.data_transformation_artifact.transformer_object_path}")
+            preprocessor_obj = joblib.load(self.data_transformation_artifact.transformer_object_path)
             joblib.dump(preprocessor_obj, self.model_deployment_config.deployment_preprocessor_path)
             logger.info(f"Preprocessor saved at: {self.model_deployment_config.deployment_preprocessor_path}")
 
@@ -55,16 +69,17 @@ class ModelRegistry:
 
     def save_deployment_report(self):
         """
-        Save metadata report about deployment.
+        Save deployment metadata report as JSON.
         """
         try:
             report = {
                 "model_path": self.model_deployment_config.deployment_model_path,
                 "preprocessor_path": self.model_deployment_config.deployment_preprocessor_path,
-                "metrics": self.model_deployment_config.deployment_report_path,
+                "report_path": self.model_deployment_config.deployment_report_path,
                 "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             }
 
+            os.makedirs(os.path.dirname(self.model_deployment_config.deployment_report_path), exist_ok=True)
             with open(self.model_deployment_config.deployment_report_path, "w") as f:
                 json.dump(report, f, indent=4)
 
@@ -94,9 +109,10 @@ class ModelRegistry:
 
             logger.info(f"ModelDeploymentArtifact created: {model_deployment_artifact}")
             logger.info(f"ModelDeploymentArtifact saved at: {os.path.abspath(model_deployment_artifact.deployment_report_path)}")
-            logger.info(f"ModelDeploymentArtifact saved successfully")
+            logger.info("✅ ModelDeploymentArtifact saved successfully")
             return model_deployment_artifact
 
         except Exception as e:
             raise CustomException(e, sys)
+
 

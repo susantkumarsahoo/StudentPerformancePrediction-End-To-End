@@ -1,7 +1,5 @@
 import os
-from src.pipelines.prediction_pipeline import PredictionPipeline
-
-
+from src.pipelines.training_pipeline import TrainingPipeline
 
 # Correct dataset path
 # Candidate paths
@@ -16,8 +14,12 @@ elif os.path.exists(path2):
 else:
     raise FileNotFoundError("❌ student.csv not found in either path!")
 
-pipeline = PredictionPipeline(dataset_path=dataset_path)
-pipeline.run_prediction_pipeline()
+print(f"✅ Using dataset: {dataset_path}")
+
+# Initialize and run the pipeline
+pipeline = TrainingPipeline(dataset_path=dataset_path)
+pipeline.run_pipeline()  # Added parentheses to actually call the method
+
 
 
 

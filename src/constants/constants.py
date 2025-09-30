@@ -69,7 +69,6 @@ MODEL_EVALUATION_REPORT_FILE_NAME = "model_evaluation_report.json"
 
 # Model Deployment Constants
 DEPLOYMENT_DIR                    = "deployment_artifacts"
-DEPLOYMENT_MODEL_DIR              = "model"
 DEPLOYMENT_MODEL_FILE_NAME        = "best_model.pkl"
 DEPLOYMENT_PREPROCESSOR_FILE_NAME = "deployed_preprocessor.pkl"
 DEPLOYMENT_MODEL_REPORT_FILE_NAME = "deployed_model_report.json"

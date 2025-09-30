@@ -10,10 +10,9 @@ from src.logging.logger import get_logger
 from src.exceptions.exception import CustomException
 from src.entity.artifact_entity import DataPreprocessingArtifact, FeatureEngineeringArtifact
 from src.entity.config_entity import FeatureEngineeringConfig
-from src.constants.constants import *
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.feature_selection import VarianceThreshold
-from src.exceptions.exception import CustomException
+
 
 
 logger = get_logger(__name__)

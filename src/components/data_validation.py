@@ -7,12 +7,10 @@ from scipy.stats import ks_2samp
 from datetime import datetime
 from typing import Dict, List, Tuple, Any, Optional
 from dataclasses import asdict
-
 from src.logging.logger import get_logger
 from src.exceptions.exception import CustomException
 from src.entity.artifact_entity import DataIngestionArtifact, DataValidationArtifact
 from src.entity.config_entity import DataValidationConfig
-from src.constants.constants import*
 
 
 logger = get_logger(__name__)

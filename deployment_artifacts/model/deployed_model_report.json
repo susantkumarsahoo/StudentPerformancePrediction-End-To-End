@@ -1,6 +1,0 @@
-{
-    "model_path": "deployment_artifacts\\model\\best_model.pkl",
-    "preprocessor_path": "deployment_artifacts\\model\\deployed_preprocessor.pkl",
-    "metrics": "deployment_artifacts\\model\\deployed_model_report.json",
-    "timestamp": "2025-09-30 04:56:52"
-}

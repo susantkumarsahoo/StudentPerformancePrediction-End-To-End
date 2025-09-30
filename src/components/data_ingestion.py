@@ -3,10 +3,9 @@ import sys
 import json
 import pandas as pd
 from datetime import datetime
-from sklearn.model_selection import train_test_split
-
 from src.logging.logger import get_logger
 from src.exceptions.exception import CustomException
+from sklearn.model_selection import train_test_split
 from src.entity.artifact_entity import DataIngestionArtifact
 from src.entity.config_entity import DataIngestionConfig
 
