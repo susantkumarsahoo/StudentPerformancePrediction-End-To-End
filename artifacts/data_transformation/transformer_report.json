@@ -2,7 +2,7 @@
     "train": {
         "shape": [
             800,
-            11
+            8
         ],
         "null_values": 0,
         "columns": [
@@ -54,34 +54,22 @@
             },
             {
                 "column": "math_score",
-                "dtype": "float64"
+                "dtype": "int64"
             },
             {
                 "column": "reading_score",
-                "dtype": "float64"
+                "dtype": "int64"
             },
             {
                 "column": "writing_score",
-                "dtype": "float64"
-            },
-            {
-                "column": "math_score reading_score",
-                "dtype": "float64"
-            },
-            {
-                "column": "math_score writing_score",
-                "dtype": "float64"
-            },
-            {
-                "column": "reading_score writing_score",
-                "dtype": "float64"
+                "dtype": "int64"
             }
         ]
     },
     "test": {
         "shape": [
             200,
-            11
+            8
         ],
         "null_values": 0,
         "columns": [
@@ -133,27 +121,15 @@
             },
             {
                 "column": "math_score",
-                "dtype": "float64"
+                "dtype": "int64"
             },
             {
                 "column": "reading_score",
-                "dtype": "float64"
+                "dtype": "int64"
             },
             {
                 "column": "writing_score",
-                "dtype": "float64"
-            },
-            {
-                "column": "math_score reading_score",
-                "dtype": "float64"
-            },
-            {
-                "column": "math_score writing_score",
-                "dtype": "float64"
-            },
-            {
-                "column": "reading_score writing_score",
-                "dtype": "float64"
+                "dtype": "int64"
             }
         ]
     }

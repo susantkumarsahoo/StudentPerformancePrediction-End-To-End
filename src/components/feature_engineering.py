@@ -49,8 +49,9 @@ class FeatureEngineering:
                 }
         return report
 
-    def create_polynomial_features(self, df: pd.DataFrame, degree: int = 2) -> pd.DataFrame:
+#    def create_polynomial_features(self, df: pd.DataFrame, degree: int = 2) -> pd.DataFrame:
         """Generate polynomial interaction features for numeric columns."""
+        """""
         num_cols = df.select_dtypes(include=[np.number]).columns.tolist()
         if len(num_cols) <= 1:
             return df
@@ -59,20 +60,21 @@ class FeatureEngineering:
         poly_df = pd.DataFrame(poly_features, columns=poly.get_feature_names_out(num_cols))
         df = pd.concat([df.drop(columns=num_cols), poly_df], axis=1)
         return df
+        """
 
-    def apply_variance_threshold(self, df: pd.DataFrame, threshold: float = 0.01) -> pd.DataFrame:
+#    def apply_variance_threshold(self, df: pd.DataFrame, threshold: float = 0.01) -> pd.DataFrame:
         """Remove low-variance features."""
+        """
         selector = VarianceThreshold(threshold)
         numeric_cols = df.select_dtypes(include=[np.number]).columns
         if len(numeric_cols) == 0:
-            return df
         df_numeric = df[numeric_cols]
         df_selected = selector.fit_transform(df_numeric)
         selected_cols = numeric_cols[selector.get_support()]
         df_selected = pd.DataFrame(df_selected, columns=selected_cols)
         df = pd.concat([df.drop(columns=numeric_cols), df_selected], axis=1)
-        return df
-
+        return df 
+        """
     def initiate_feature_engineering(self) -> FeatureEngineeringArtifact:
         try:
             logger.info("Loading preprocessed train and test data.")
@@ -80,12 +82,6 @@ class FeatureEngineering:
             test_df = pd.read_csv(self.data_preprocessing_artifact.preprocessing_test_path)
 
             logger.info("Generating polynomial features.")
-            train_df = self.create_polynomial_features(train_df, degree=2)
-            test_df = self.create_polynomial_features(test_df, degree=2)
-
-            logger.info("Applying variance threshold feature selection.")
-            train_df = self.apply_variance_threshold(train_df)
-            test_df = test_df[train_df.columns]  # Align columns
 
             logger.info("Saving feature-engineered data.")
             train_df.to_csv(self.feature_engineering_config.feature_engineering_train_path, index=False)
@@ -93,8 +89,9 @@ class FeatureEngineering:
 
             feature_report = {
                 "train_features": self.generate_feature_report(train_df),
-                "test_features": self.generate_feature_report(test_df)
+                "test_features": self.generate_feature_report(test_df),
             }
+
 
             with open(self.feature_engineering_config.feature_engineering_report_path, "w") as f:
                 json.dump(feature_report, f, indent=4)

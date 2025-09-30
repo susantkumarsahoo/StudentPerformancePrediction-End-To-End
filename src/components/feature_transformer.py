@@ -65,16 +65,26 @@ class FeatureTransformer:
             report["columns"].append(info)
         return report
 
+
+
     def initiate_data_transformation(self) -> DataTransformationArtifact:
         try:
             logger.info("Loading feature-engineered train and test data.")
             train_df = pd.read_csv(self.feature_engineering_artifact.feature_engineering_train_path)
             test_df = pd.read_csv(self.feature_engineering_artifact.feature_engineering_test_path)
 
-            num_features = train_df.select_dtypes(include=[np.number]).columns.tolist()
-            cat_features = train_df.select_dtypes(include=[object]).columns.tolist()
+            # ✅ Define target column explicitly
+            target_col = "math_score"
 
-            logger.info("Building advanced preprocessing pipeline.")
+            # ✅ Features = all columns except target
+            feature_cols = [col for col in train_df.columns if col != target_col]
+
+            num_features = train_df[feature_cols].select_dtypes(include=[np.number]).columns.tolist()
+            cat_features = train_df[feature_cols].select_dtypes(include=[object]).columns.tolist()
+
+            logger.info(f"Numeric features: {num_features}")
+            logger.info(f"Categorical features: {cat_features}")
+
             num_transformer = Pipeline(steps=[("scaler", StandardScaler())])
             cat_transformer = Pipeline(steps=[("onehot", OneHotEncoder(handle_unknown="ignore", sparse_output=False))])
 
@@ -85,22 +95,18 @@ class FeatureTransformer:
                 ]
             )
 
-            logger.info("Fitting transformer on training data.")
-            X_train = preprocessor.fit_transform(train_df)
-            X_test = preprocessor.transform(test_df)
+            logger.info("Fitting transformer on training features only.")
+            X_train = preprocessor.fit_transform(train_df[feature_cols])
+            X_test = preprocessor.transform(test_df[feature_cols])
 
-            # ✅ Already NumPy arrays, no need to call .to_numpy()
-            X_train_arr = X_train
-            X_test_arr = X_test
+            # Save transformed arrays
+            np.save(self.data_transformation_config.transformer_train_path, X_train)
+            np.save(self.data_transformation_config.transformer_test_path, X_test)
 
-            # ✅ Save the NumPy Arrays
-            np.save(self.data_transformation_config.transformer_train_path, X_train_arr)
-            np.save(self.data_transformation_config.transformer_test_path, X_test_arr)
-
-            logger.info("Saving transformed datasets and transformer object.")
+            # Save transformer object
             joblib.dump(preprocessor, self.data_transformation_config.transformer_object_path)
 
-            # ⚠️ Report should be generated from original DataFrames, not arrays
+            # Generate transformation report using original DataFrames
             transformation_report = {
                 "train": self.generate_transformation_report(train_df),
                 "test": self.generate_transformation_report(test_df)
@@ -109,7 +115,7 @@ class FeatureTransformer:
             with open(self.data_transformation_config.transformer_report_path, "w") as f:
                 json.dump(transformation_report, f, indent=4)
 
-            logger.info("Advanced data transformation completed successfully.")
+            logger.info("Data transformation completed successfully.")
 
             return DataTransformationArtifact(
                 transformer_train_path=self.data_transformation_config.transformer_train_path,
@@ -120,6 +126,7 @@ class FeatureTransformer:
 
         except Exception as e:
             raise CustomException(e, sys)
+
 
 
 

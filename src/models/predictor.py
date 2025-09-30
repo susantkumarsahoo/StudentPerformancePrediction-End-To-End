@@ -18,7 +18,7 @@ class ModelPredictor:
 
             self.model_deployment_artifact = model_deployment_artifact
 
-            # Check model + preprocessor existence
+            # Check existence
             if not os.path.exists(self.model_deployment_artifact.deployment_model_path):
                 raise FileNotFoundError(
                     f"Model file not found: {self.model_deployment_artifact.deployment_model_path}"
@@ -29,9 +29,16 @@ class ModelPredictor:
                     f"Preprocessor file not found: {self.model_deployment_artifact.deployment_preprocessor_path}"
                 )
 
-            # Load model and preprocessor once during initialization
+            # Load model and preprocessor
             self.model = joblib.load(self.model_deployment_artifact.deployment_model_path)
             self.preprocessor = joblib.load(self.model_deployment_artifact.deployment_preprocessor_path)
+
+            # Save training columns for feature consistency
+            if hasattr(self.preprocessor, "get_feature_names_out"):
+                self.feature_columns = self.preprocessor.get_feature_names_out()
+            else:
+                # fallback if preprocessor is older
+                self.feature_columns = None
 
             logger.info("✅ ModelPredictor initialized successfully")
 
@@ -42,12 +49,21 @@ class ModelPredictor:
         try:
             # Convert input dict to DataFrame
             input_df = pd.DataFrame([input_data])
-            logger.info("Input data converted to DataFrame for prediction.")
+            logger.info("Input data converted to DataFrame.")
+
+            # Drop target column if exists
+            input_features = input_df.drop(columns=['math_score'], errors='ignore')
 
             # Transform input
-            X_processed = self.preprocessor.transform(input_df)
+            X_processed = self.preprocessor.transform(input_features)
 
-            # Make prediction
+            # Handle feature mismatch
+            if self.feature_columns is not None and X_processed.shape[1] != len(self.feature_columns):
+                raise ValueError(
+                    f"Feature mismatch: expected {len(self.feature_columns)} features, got {X_processed.shape[1]}"
+                )
+
+            # Predict
             prediction = self.model.predict(X_processed)
             logger.info(f"Prediction: {prediction[0]}")
             print(f"🎯 Predicted value: {prediction[0]}")
@@ -55,5 +71,6 @@ class ModelPredictor:
 
         except Exception as e:
             raise CustomException(e, sys)
+
 
 
