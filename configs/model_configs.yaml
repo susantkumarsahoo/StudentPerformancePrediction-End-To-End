@@ -1,0 +1,33 @@
+# feature_config.yml
+
+columns:
+  categorical:
+    - name: gender
+      dtype: object
+    - name: race_ethnicity
+      dtype: object
+    - name: parental_level_of_education
+      dtype: object
+    - name: lunch
+      dtype: object
+    - name: test_preparation_course
+      dtype: object
+
+  numerical:
+    - name: math_score
+      dtype: int64
+    - name: reading_score
+      dtype: int64
+    - name: writing_score
+      dtype: int64
+
+# Full column order (for reference or alignment in prediction)
+all_columns:
+  - gender
+  - race_ethnicity
+  - parental_level_of_education
+  - lunch
+  - test_preparation_course
+  - math_score
+  - reading_score
+  - writing_score

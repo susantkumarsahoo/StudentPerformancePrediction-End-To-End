@@ -16,7 +16,6 @@ user_input = {
     "parental_level_of_education": "bachelor's degree",
     "lunch": "standard",
     "test_preparation_course": "none",
-    "math_score": 72,      # if used as input in preprocessing
     "reading_score": 72,
     "writing_score": 74
 }
@@ -122,5 +121,5 @@ class TrainingPipeline:
         model_predictor = ModelPredictor(
             model_deployment_artifact=model_deployment_artifact
         )
-        model_predictor.predict(input_data=user_input)
+        model_predictor.predict(user_input)
 

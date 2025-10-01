@@ -15,8 +15,8 @@ class ModelTrainingConfig:
         os.makedirs(self.timestamp_dir, exist_ok=True)
 
         # File paths
-        self.best_model_path = os.path.join(self.model_training_dir, BEST_MODEL_FILE_NAME)
-        self.model_evaluation_report_path = os.path.join(self.model_training_dir, MODEL_REPORT_FILE_NAME)
+        self.best_model_path = os.path.join(self.model_training_dir, MODEL_TRAINING_BEST_FILE)
+        self.model_evaluation_report_path = os.path.join(self.model_training_dir, MODEL_TRAINING_REPORT_FILE)
 
 # Configuration class for model evaluation
 class ModelEvaluationConfig:
@@ -30,13 +30,13 @@ class ModelEvaluationConfig:
         os.makedirs(self.timestamp_dir, exist_ok=True)
 
         # File paths
-        self.model_evaluation_report_path = os.path.join(self.model_evaluation_dir, MODEL_EVALUATION_REPORT_FILE_NAME)
+        self.model_evaluation_report_path = os.path.join(self.model_evaluation_dir, MODEL_EVALUATION_REPORT_FILE)
 
 # Configuration class for model deployment
 class ModelDeploymentConfig:
     def __init__(self):
         # Main artifact directory for model deployment
-        self.model_deployment_dir = os.path.join(DEPLOYMENT_DIR)
+        self.model_deployment_dir = os.path.join(MODEL_DEPLOYMENT_DIR)
         self.timestamp_dir = os.path.join(self.model_deployment_dir, TIMESTAMP)
 
         # Make sure the directory exists
@@ -45,16 +45,16 @@ class ModelDeploymentConfig:
 
 
         # File paths
-        self.deployment_model_path = os.path.join(self.model_deployment_dir, DEPLOYMENT_MODEL_FILE_NAME)
-        self.deployment_preprocessor_path = os.path.join(self.model_deployment_dir, DEPLOYMENT_PREPROCESSOR_FILE_NAME)
-        self.deployment_report_path = os.path.join(self.model_deployment_dir, DEPLOYMENT_MODEL_REPORT_FILE_NAME)
+        self.deployment_model_path = os.path.join(self.model_deployment_dir, MODEL_DEPLOYMENT_MODEL_FILE)
+        self.deployment_preprocessor_path = os.path.join(self.model_deployment_dir, MODEL_DEPLOYMENT_PREPROCESSOR_FILE)
+        self.deployment_report_path = os.path.join(self.model_deployment_dir, MODEL_DEPLOYMENT_REPORT_FILE)
 
        
 # Configuration class for database
 class DatabaseConfig:
     def __init__(self):
         # Main artifact directory for database
-        self.database_dir = os.path.join(ARTIFACTS_DIR, DATABASE_DIR)
+        self.database_dir = os.path.join(DATABASE_DIR, DATABASE_NAME)
         self.timestamp_dir = os.path.join(self.database_dir, TIMESTAMP)
 
         # Make sure the directory exists
@@ -62,16 +62,16 @@ class DatabaseConfig:
         os.makedirs(self.timestamp_dir, exist_ok=True)
 
         # File paths
-        self.database_file_path = os.path.join(self.database_dir, DATABASE_FILE_NAME)
-        self.collection_path = os.path.join(self.database_dir, COLLECTION_NAME)
-        self.database_report_path = os.path.join(self.database_dir, DATABASE_REPORT_FILE_NAME)
+        self.database_file_path = os.path.join(self.database_dir, DATABASE_FILE)
+        self.collection_path = os.path.join(self.database_dir, DATABASE_COLLECTION)
+        self.database_report_path = os.path.join(self.database_dir, DATABASE_REPORT_FILE)
 
 
 # Configuration class for logging
 class LoggingConfig:
     def __init__(self):
         # Main artifact directory for logging
-        self.log_dir = os.path.join( LOG_DIR,LOG_LOGGER)
+        self.log_dir = os.path.join(LOGGING_DIR)
         self.timestamp_dir = os.path.join(self.log_dir, TIMESTAMP)
 
         # Make sure the directory exists
@@ -79,5 +79,5 @@ class LoggingConfig:
         os.makedirs(self.timestamp_dir, exist_ok=True)
 
         # File paths
-        self.log_file_path = os.path.join(self.log_dir, LOG_DIR)
-        self.log_report_path = os.path.join(self.log_dir, LOG_REPORT_FILE_NAME)
+        self.log_file_path = os.path.join(self.log_dir, LOGGING_REPORT_FILE)
+        self.log_report_path = os.path.join(self.log_dir, LOGGING_LOGGER_NAME)

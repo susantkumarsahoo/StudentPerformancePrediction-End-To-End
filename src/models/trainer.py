@@ -19,6 +19,7 @@ from src.exceptions.exception import CustomException
 from src.logging.logger import get_logger
 from sklearn.linear_model import Lasso
 from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.model_selection import train_test_split
 
 
 logger = get_logger(__name__)
@@ -61,8 +62,7 @@ class ModelTrainer:
             train_data = np.load(self.data_transformation_artifact.transformer_train_path)
             test_data = np.load(self.data_transformation_artifact.transformer_test_path)
 
-            X_train, y_train = train_data[:, :-1], train_data[:, -1]
-            X_test, y_test = test_data[:, :-1], test_data[:, -1]
+            X_train, X_test, y_train, y_test = train_test_split(train_data,test_data,test_size=0.2,random_state=42)
 
             logger.info("Starting model training process.")
             model = self.train_model(X_train, y_train)
