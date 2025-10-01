@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Student Performance Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <nav class="navbar navbar-light bg-light static-top">
+        <div class="container-fluid">
+           <a class="navbar-brand" href="#"><strong>Student Predictor</strong></a>
+        </div>
+     </nav>
+
+    <section>
+        <div class="container-fluid">
+            <div class="container">
+                <form action="/" method="post">
+                    <legend>Student Performance Prediction Form</legend>
+                    
+                    <div class="mb-3">
+                        <label for="gender">Gender</label>
+                        <select class="form-control" id="gender" name="gender" required>
+                            <option value="" disabled selected>Select Gender</option>
+                            <option value="female">Female</option>
+                            <option value="male">Male</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="race_ethnicity">Race / Ethnicity</label>
+                        <select class="form-control" id="race_ethnicity" name="race_ethnicity" required>
+                            <option value="" disabled selected>Select Group</option>
+                            <option value="group A">Group A</option>
+                            <option value="group B">Group B</option>
+                            <option value="group C">Group C</option>
+                            <option value="group D">Group D</option>
+                            <option value="group E">Group E</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="parental_level_of_education">Parental Level of Education</label>
+                        <select class="form-control" id="parental_level_of_education" name="parental_level_of_education" required>
+                            <option value="" disabled selected>Select Education</option>
+                            <option value="high school">High School</option>
+                            <option value="some college">Some College</option>
+                            <option value="associate's degree">Associate's Degree</option>
+                            <option value="bachelor's degree">Bachelor's Degree</option>
+                            <option value="master's degree">Master's Degree</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="lunch">Lunch Type</label>
+                        <select class="form-control" id="lunch" name="lunch" required>
+                            <option value="" disabled selected>Select Lunch</option>
+                            <option value="standard">Standard</option>
+                            <option value="free/reduced">Free/Reduced</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="test_preparation_course">Test Preparation Course</label>
+                        <select class="form-control" id="test_preparation_course" name="test_preparation_course" required>
+                            <option value="" disabled selected>Select Course</option>
+                            <option value="none">None</option>
+                            <option value="completed">Completed</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="reading_score">Reading Score</label>
+                        <input type="number" class="form-control" id="reading_score" name="reading_score" min="0" max="100" placeholder="Enter Reading Score" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="writing_score">Writing Score</label>
+                        <input type="number" class="form-control" id="writing_score" name="writing_score" min="0" max="100" placeholder="Enter Writing Score" required>
+                    </div>
+
+                    <input class="btn btn-primary" type="submit" value="Predict Performance">
+                </form>
+            </div>
+
+            <div class="text-center text-black mt-4">
+                {% if prediction is not none %}
+                  <h2 class="display-6 fw-bold">Prediction Result: {{ prediction }}</h2>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script type="text/javascript">
+        $(".input").focus(function(){
+            $(this).parent().addClass("focus");
+        }).blur(function(){
+            if($(this).val() === ''){
+                $(this).parent().removeClass("focus");
+            }
+        })
+    </script>
+  </body>
+</html>

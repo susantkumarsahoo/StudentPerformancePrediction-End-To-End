@@ -124,7 +124,7 @@ list_of_files = [
     f"{notebooks_folder}/README.md",  # Explains notebooks workflow
     f"{notebooks_folder}/01_note01.ipynb",
     f"{notebooks_folder}/02_note02.ipynb",
-    f"{templates_folder}/project.html",
+    f"{templates_folder}/index.html",
     f"{static_css_folder}/style.css",
 
     # Scripts

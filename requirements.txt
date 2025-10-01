@@ -11,4 +11,5 @@ python-dotenv
 catboost
 scipy
 # evidently==0.2.8
+flask
 -e .

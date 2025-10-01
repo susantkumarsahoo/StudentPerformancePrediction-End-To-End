@@ -8,6 +8,7 @@ from src.components.feature_transformer import FeatureTransformer
 from src.models.trainer import ModelTrainer
 from src.models.model_registry import ModelRegistry
 from src.models.predictor import ModelPredictor
+from src.pipelines.prediction_pipeline import StudentDataInput
 
 
 user_input = {
@@ -122,4 +123,7 @@ class TrainingPipeline:
             model_deployment_artifact=model_deployment_artifact
         )
         model_predictor.predict(user_input)
+
+
+
 

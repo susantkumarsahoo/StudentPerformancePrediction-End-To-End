@@ -25,6 +25,7 @@ setup(
         "python-dotenv",
         "catboost",
         "scipy",
+        "flask"
       # "evidently==0.2.8"
     ],
     

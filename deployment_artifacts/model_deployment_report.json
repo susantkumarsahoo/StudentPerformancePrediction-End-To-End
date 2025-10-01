@@ -2,5 +2,5 @@
     "model_path": "deployment_artifacts\\best_model.pkl",
     "preprocessor_path": "deployment_artifacts\\preprocessor.pkl",
     "report_path": "deployment_artifacts\\model_deployment_report.json",
-    "timestamp": "2025-10-01 10:31:34"
+    "timestamp": "2025-10-02 05:27:13"
 }
