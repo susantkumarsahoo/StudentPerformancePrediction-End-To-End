@@ -4,6 +4,7 @@ from src.pipelines.deployment_pipeline import DeploymentPipeline
 from src.pipelines.prediction_pipeline import StudentDataInput
 from src.logging.logger import get_logger
 from src.exceptions.exception import CustomException
+from src.constants.constants import*
 
 logger = get_logger(__name__)
 
@@ -17,8 +18,8 @@ def main():
         # Step 1: Find dataset path
         logger.info("🔍 Locating dataset...")
         
-        path1 = r"C:\Users\LENOVO\MachineLearningProhects\StudentPerformancePrediction-End-To-End\data\raw\student.csv"
-        path2 = r"C:\Users\TPWODL\New folder_Content\StudentPerformancePrediction-End-To-End\data\raw\student.csv"
+        path1 = DATA_PATH_01
+        path2 = DATA_PATH_02
         
         if os.path.exists(path1):
             dataset_path = path1

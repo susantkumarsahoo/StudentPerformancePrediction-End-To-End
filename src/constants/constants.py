@@ -95,7 +95,9 @@ LOGGING_REPORT_FILE = "application.log"
 # Target column
 TARGET_COLUMN = "math_score"
 
+DATA_PATH_01 = r"C:\Users\LENOVO\MachineLearningProhects\StudentPerformancePrediction-End-To-End\data\raw\student.csv"
 
+DATA_PATH_02 = r"C:\Users\TPWODL\New folder_Content\StudentPerformancePrediction-End-To-End\data\raw\student.csv"
 
 
 
