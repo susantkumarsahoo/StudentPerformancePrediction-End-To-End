@@ -6,6 +6,7 @@ from src.components.data_preprocessing import DataPreprocessing
 from src.components.feature_engineering import FeatureEngineering
 from src.components.feature_transformer import FeatureTransformer
 from src.models.trainer import ModelTrainer
+from src.models.evaluator import ModelEvaluation
 from src.models.model_registry import ModelRegistry
 from src.logging.logger import get_logger
 from src.exceptions.exception import CustomException
@@ -30,7 +31,8 @@ from src.entity.config_entity import (
 
 from src.entity.model_config_entity import (
     ModelTrainingConfig, 
-    ModelDeploymentConfig
+    ModelDeploymentConfig,
+    ModelEvaluationConfig
 )
 
 logger = get_logger(__name__)
@@ -107,6 +109,17 @@ class TrainingPipeline:
             model_training_artifact = model_trainer.initiate_model_trainer()
             logger.info("✅ Model Training completed")
             
+            # model evaluation
+            logger.info("🔹 Step 7: Model Evaluation")
+            model_evaluation_config = ModelEvaluationConfig()
+            model_eval = ModelEvaluation(
+                model_evaluation_config=model_evaluation_config,
+                data_transformation_artifact=data_transformation_artifact,
+                model_training_artifact=model_training_artifact
+            )
+            model_evaluation_artifact = model_eval.initiate_model_evaluation()
+            logger.info("✅ Model Evaluation completed")
+        
             # Step 7: Model Deployment/Registry
             logger.info("🔹 Step 7: Model Deployment")
             model_deployment_config = ModelDeploymentConfig()

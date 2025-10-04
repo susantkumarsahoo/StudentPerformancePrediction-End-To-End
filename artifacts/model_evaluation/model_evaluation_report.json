@@ -1,0 +1,10 @@
+{
+    "model_path": "artifacts\\model_training\\best_model.pkl",
+    "is_model_accepted": true,
+    "metrics": {
+        "R2_Score": 0.8710329333435418,
+        "MAE": 4.050019909200094,
+        "MSE": 25.600604342463566,
+        "RMSE": 5.059703977750434
+    }
+}

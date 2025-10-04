@@ -1,3 +1,5 @@
+import os
+import webbrowser
 from flask import Flask, render_template, request, jsonify
 from src.pipelines.deployment_pipeline import DeploymentPipeline
 from src.pipelines.prediction_pipeline import StudentDataInput
@@ -6,10 +8,9 @@ from src.exceptions.exception import CustomException
 from src.constants.constants import *
 
 logger = get_logger(__name__)
-
 app = Flask(__name__)
 
-# Initialize DeploymentPipeline and run training once
+# Initialize dataset path
 path1 = DATA_PATH_01
 path2 = DATA_PATH_02
 
@@ -22,13 +23,8 @@ elif os.path.exists(path2):
 else:
     raise FileNotFoundError("❌ student.csv not found in either path!")
 
+# Initialize deployment pipeline (but don't run it yet)
 deployment_pipeline = DeploymentPipeline(dataset_path=dataset_path)
-
-# Run the training/deployment pipeline only once at startup
-if deployment_pipeline.model_deployment_artifact is None:
-    logger.info("🚀 Running Deployment Pipeline at startup...")
-    deployment_pipeline.run_deployment_pipeline()
-    logger.info("✅ Deployment Pipeline ready.")
 
 
 @app.route("/", methods=["GET"])
@@ -40,7 +36,6 @@ def home():
 def predict():
     try:
         data = request.get_json()
-
         student = StudentDataInput(
             gender=data["gender"],
             race_ethnicity=data["race_ethnicity"],
@@ -61,13 +56,18 @@ def predict():
 
 
 if __name__ == "__main__":
-    import webbrowser
-    import os
+    # Run the deployment pipeline only once at startup
+    if deployment_pipeline.model_deployment_artifact is None:
+        logger.info("🚀 Running Deployment Pipeline at startup...")
+        deployment_pipeline.run_deployment_pipeline()
+        logger.info("✅ Deployment Pipeline ready.")
 
-    # Prevent multiple browser tabs in debug mode
-    if not os.environ.get("WERKZEUG_RUN_MAIN"):  # Only open once
+
+    # Open browser only once
+    if not os.environ.get("WERKZEUG_RUN_MAIN"):
         webbrowser.open("http://127.0.0.1:5000/")
 
-    app.run(debug=True)
+    # Run Flask app without reloader to prevent double execution
+    app.run(debug=True, use_reloader=False)
 
 
